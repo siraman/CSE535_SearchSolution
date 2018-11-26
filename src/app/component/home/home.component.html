@@ -1,0 +1,19 @@
+<div class="application_background_off_white" style="padding: 16px;">
+
+  <app-query></app-query>
+
+
+  <div>
+    <div class="trending_hashtags_title_container">
+      <span>Trending hashtags</span>
+    </div>
+    <div class="hashtag_grid">
+      <div class="application_white_container hashtag_grid_container"
+           *ngFor="let inputModel of hashtagFacetInputModelList">
+
+        <app-hashtags [hashtagFacetInputModel]="inputModel"></app-hashtags>
+      </div>
+    </div>
+  </div>
+
+</div>

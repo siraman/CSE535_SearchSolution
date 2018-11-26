@@ -1,0 +1,27 @@
+:host /deep/ .ngx-pagination{
+  display: inline-block;
+  padding: 0;
+}
+:host /deep/ .ngx-pagination a{
+  color: var(--accent-color-dark);
+}
+:host /deep/ .ngx-pagination a:focus{
+  outline: none;
+}
+:host /deep/ .ngx-pagination .current{
+  color: var(--text-color-primary-dark);
+  background: #fefefe
+}
+:host /deep/ .ngx-pagination li{
+  color: #4285f4
+}
+:host /deep/ .ngx-pagination li.disabled{
+  color: #cacaca !important;
+}
+:host /deep/ .ngx-pagination li :hover{
+  cursor: pointer;
+  background: var(--background-color-default)
+}
+:host /deep/ .search_container[_ngcontent-c2]{
+  padding-top: 0;
+}

@@ -1,0 +1,17 @@
+<div class="application_background_off_white" style="padding: 16px;">
+
+  <app-query></app-query>
+
+  <span *ngIf="searched"> {{totalTweets}} results found</span>
+  <div>
+    <div *ngIf="totalTweets > 0">
+      <div *ngFor="let result of results | paginate: { id: 'server', itemsPerPage: 10, currentPage: currentPage, totalItems: totalTweets} " style="margin-top: 10px">
+        <a>{{result.text}}</a>
+      </div>
+      <pagination-controls directionLinks = 'true' autoHide="true" responsive="true" previousLabel=""
+                           nextLabel="" (pageChange)="getPage($event)" id= 'server'></pagination-controls>
+    </div>
+
+  </div>
+</div>
+

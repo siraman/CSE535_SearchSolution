@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-query',
@@ -8,8 +9,12 @@ import {Component, OnInit} from '@angular/core';
 export class QueryComponent implements OnInit {
 
   today: number;
+  query: string;
 
-  constructor() {
+  constructor(private router: Router) {
+  }
+  performSearch(query) {
+    return this.router.navigate(['/search-results'], {queryParams: {query: query}});
   }
 
   ngOnInit() {
