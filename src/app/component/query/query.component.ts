@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 export class QueryComponent implements OnInit {
 
   today: number;
-  @Input() query: string;
+  query: string;
 
   constructor(private router: Router) {
   }
