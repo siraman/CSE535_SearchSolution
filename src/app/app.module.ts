@@ -9,7 +9,8 @@ import {TweetComponent} from './component/tweet/tweet.component';
 import {QueryComponent} from './component/query/query.component';
 import {HashtagComponent} from './component/hashtags/hashtag.component';
 import {SearchComponent} from './component/search/search.component';
-import { HomeComponent } from './component/home/home.component';
+import {HomeComponent} from './component/home/home.component';
+import {SearchQueryComponent} from './component/search-query/search-query.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeComponent } from './component/home/home.component';
     QueryComponent,
     HashtagComponent,
     SearchComponent,
-    HomeComponent
+    HomeComponent,
+    SearchQueryComponent
   ],
   imports: [
     BrowserModule,
