@@ -104,3 +104,22 @@ html {
 .padding_16_px {
   padding: 16px
 }
+
+.padding_5px{
+  padding: 5px;
+}
+.color_red{
+  color: #f16262;
+}
+.color_blue{
+  color: var(--accent-color-normal);
+}
+.margin_3px{
+  margin:3px;
+}
+.font_family{
+  font-family: Arvo, Roboto, Helvetica, sans-serif;
+}
+.timestamp_color{
+  color:#808080
+}

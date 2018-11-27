@@ -9,7 +9,7 @@
           <i class="material-icons" style="cursor: default !important;">search</i>
         </button>
       </span>
-      <input type="text" [(ngModel)]="query" class="form-control search_input search_input_text" placeholder="What are you looking for?">
+      <input type="text" [(ngModel)]="query" (keyup.enter)="performSearch(query)"  class="form-control search_input search_input_text" placeholder="What are you looking for?">
     </div>
   </div>
 </div>
