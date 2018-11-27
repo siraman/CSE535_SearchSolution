@@ -1,0 +1,41 @@
+<div class = "hashtag_grid">
+  <div class="application_white_container hashtag_grid_container">
+      <div class="hashtag-head">
+        <div class="hashtag_title_container">
+          <h3 class="subsection_heading hashtag_title">Topic</h3>
+        </div>
+      </div>
+      <div class="hashtag_body">
+        <select id="topic">
+          <option  value="" disabled selected>select a topic</option>
+          <option *ngFor="let topic of filterInputModelListofTopic">{{topic.display}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="application_white_container hashtag_grid_container">
+      <div class="hashtag-head">
+        <div class="hashtag_title_container">
+          <h3 class="subsection_heading hashtag_title">Language</h3>
+        </div>
+      </div>
+      <div class="hashtag_body">
+        <select id="language">
+          <option  value="" disabled selected>select a language</option>
+          <option *ngFor="let lang of filterInputModelListofLanguage">{{lang.display}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="application_white_container hashtag_grid_container">
+      <div class="hashtag-head">
+        <div class="hashtag_title_container">
+          <h3 class="subsection_heading hashtag_title">City</h3>
+        </div>
+      </div>
+      <div class="hashtag_body">
+        <select id="city">
+          <option  value="" disabled selected>select a city</option>
+          <option *ngFor="let city of filterInputModelListofCity">{{city.display}}</option>
+        </select>
+      </div>
+    </div>
+</div>

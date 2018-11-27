@@ -1,6 +1,7 @@
 <div class="application_background_off_white" style="padding: 16px;">
 
   <app-query></app-query>
+  <app-filter></app-filter>
 
   <span *ngIf="searched"> {{totalTweets}} results found</span>
   <div>
@@ -11,7 +12,6 @@
       <pagination-controls directionLinks = 'true' autoHide="true" responsive="true" previousLabel=""
                            nextLabel="" (pageChange)="getPage($event)" id= 'server'></pagination-controls>
     </div>
-
   </div>
 </div>
 

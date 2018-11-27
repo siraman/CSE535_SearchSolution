@@ -28,7 +28,7 @@ export class ApplicationConstants {
   static readonly FOCUS_AREA_CITY_BANGKOK_CODE_STRING = 'bangkok';
   static readonly FOCUS_AREA_CITY_MEXICO_CITY_CODE_STRING = 'mexico city';
 
-  static readonly FOCUS_AREA_CITY_NYC_DISPLAY_STRING = 'New York city';
+  static readonly FOCUS_AREA_CITY_NYC_DISPLAY_STRING = 'New York City';
   static readonly FOCUS_AREA_CITY_DELHI_DISPLAY_STRING = 'Delhi';
   static readonly FOCUS_AREA_CITY_PARIS_DISPLAY_STRING = 'Paris';
   static readonly FOCUS_AREA_CITY_BANGKOK_DISPLAY_STRING = 'Bangkok';

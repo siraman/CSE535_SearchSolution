@@ -11,6 +11,7 @@ import {HashtagComponent} from './component/hashtags/hashtag.component';
 import {SearchComponent} from './component/search/search.component';
 import {HomeComponent} from './component/home/home.component';
 import {SearchQueryComponent} from './component/search-query/search-query.component';
+import { FilterComponent } from './component/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {SearchQueryComponent} from './component/search-query/search-query.compon
     HashtagComponent,
     SearchComponent,
     HomeComponent,
-    SearchQueryComponent
+    SearchQueryComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
