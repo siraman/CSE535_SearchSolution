@@ -1,17 +1,57 @@
-<div class="application_background_off_white" style="padding: 16px;">
+<div class="application_background_off_white search_container">
 
-  <app-query></app-query>
+  <app-search-query (queryChange)="captureEvent($event)"></app-search-query>
 
-  <span *ngIf="searched"> {{totalTweets}} results found</span>
-  <div>
-    <div *ngIf="totalTweets > 0">
-      <div *ngFor="let result of results | paginate: { id: 'server', itemsPerPage: 10, currentPage: currentPage, totalItems: totalTweets} " style="margin-top: 10px">
-        <a>{{result.text}}</a>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+        <div *ngIf="searched" class="font_family padding_5px"> {{totalTweets}} results found</div>
+        <div *ngIf="totalTweets > 0">
+          <div class = "result-card application_white_container" *ngFor="let result of results | paginate: { id: 'server', itemsPerPage: 10, currentPage: currentPage, totalItems: totalTweets}">
+            <div><a class="subsubsection_heading" data-toggle="modal" data-target="#exampleModal" title="{{result.text}}">{{result.text}}</a></div>
+            <div class="clearfix">
+              <div class="font_family float-left timestamp_color">{{result.created_at}}</div>
+              <div class="float-right">
+                <i class="fa fa-retweet color_blue margin_3px"  title="retweeted" aria-hidden="true">{{result.retweet_count}}</i>
+                <i class="fa fa-heart color_red margin_3px" aria-hidden="true" title="favorite">{{result.favorite_count}}</i>
+                <!--<i class="fa fa-heart" aria-hidden="true">{{result.favorite_count}}</i>-->
+                <!--<i class="fa fa-location-arrow" aria-hidden="true">{{result.queryMetadata.query_city}}</i>-->
+              </div>
+            </div>
+            <div class="clearfix font_family">
+              {{result.text}}
+            </div>
+
+          </div>
+          <div class="text-center pagination-container">
+            <pagination-controls directionLinks = 'true' autoHide="true" responsive="true" previousLabel=""
+                                 nextLabel="" (pageChange)="getPage($event)" id= 'server'></pagination-controls>
+          </div>
+
+        </div>
       </div>
-      <pagination-controls directionLinks = 'true' autoHide="true" responsive="true" previousLabel=""
-                           nextLabel="" (pageChange)="getPage($event)" id= 'server'></pagination-controls>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
     </div>
-
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tweet Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
