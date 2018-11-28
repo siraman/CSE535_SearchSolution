@@ -1,41 +1,85 @@
-<div class = "hashtag_grid">
-  <div class="application_white_container hashtag_grid_container">
-      <div class="hashtag-head">
-        <div class="hashtag_title_container">
-          <h3 class="subsection_heading hashtag_title">Topic</h3>
-        </div>
-      </div>
-      <div class="hashtag_body">
-        <select id="topic">
-          <option  value="" disabled selected>select a topic</option>
-          <option *ngFor="let topic of filterInputModelListofTopic">{{topic.display}}</option>
-        </select>
+<div class="application_white_container" style="width: 20% !important; height:100% !important;">
+
+  <div class="filter_container_head">
+    <!--<div class="hashtag_symbol_container">-->
+    <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+    <!--</div>-->
+    <div class="filter_container_head_title_container">
+      <h3 class="section_heading filter_container_head_title">Filters</h3>
+    </div>
+    <div class="filter_symbol_container">
+      <button class="btn btn-default filter_clear_button" type="button">
+        Clear
+      </button>
+    </div>
+  </div>
+  <div class="">
+    <div class="filter-head">
+      <div class="filter_title_container">
+        <h3 class="subsection_heading filter_title">Topic</h3>
       </div>
     </div>
-    <div class="application_white_container hashtag_grid_container">
-      <div class="hashtag-head">
-        <div class="hashtag_title_container">
-          <h3 class="subsection_heading hashtag_title">Language</h3>
-        </div>
-      </div>
-      <div class="hashtag_body">
-        <select id="language">
-          <option  value="" disabled selected>select a language</option>
-          <option *ngFor="let lang of filterInputModelListofLanguage">{{lang.display}}</option>
-        </select>
+    <div class="filter_body">
+      <select (change)="selectChangeHandlerTopic ($event)" class="filter"
+              style="color:var(--text-color-disabled-normal)">
+        <option style="display:none;"></option>
+        <option *ngFor="let topic of filterInputModelListOfTopic" class="filter_text">{{topic.display}}</option>
+      </select>
+      <p style="visibility: hidden; height: 0">
+        <span> You selected:</span> <b>
+        {{selectedTopic}}
+      </b>
+      </p>
+    </div>
+  </div>
+  <div class="">
+    <div class="filter-head">
+      <div class="filter_title_container">
+        <h3 class="subsection_heading filter_title">Language</h3>
       </div>
     </div>
-    <div class="application_white_container hashtag_grid_container">
-      <div class="hashtag-head">
-        <div class="hashtag_title_container">
-          <h3 class="subsection_heading hashtag_title">City</h3>
-        </div>
-      </div>
-      <div class="hashtag_body">
-        <select id="city">
-          <option  value="" disabled selected>select a city</option>
-          <option *ngFor="let city of filterInputModelListofCity">{{city.display}}</option>
-        </select>
+    <div class="filter_body">
+      <select (change)="selectChangeHandlerTopic ($event)" class="filter"
+              style="color:var(--text-color-disabled-normal)">
+        <option style="display:none;"></option>
+        <option *ngFor="let language of filterInputModelListOfLanguage"
+                class="filter_text">{{language.display}}</option>
+      </select>
+      <p style="visibility: hidden;  height: 0">
+        <span> You selected:</span> <b>
+        {{selectedLanguage}}
+      </b>
+      </p>
+    </div>
+  </div>
+  <div class="">
+    <div class="filter-head">
+      <div class="filter_title_container">
+        <h3 class="subsection_heading filter_title">City</h3>
       </div>
     </div>
+    <div class="filter_body">
+      <select (change)="selectChangeHandlerTopic ($event)" class="filter"
+              style="color:var(--text-color-disabled-normal)">
+        <option style="display:none;"></option>
+        <option *ngFor="let city of filterInputModelListOfCity" class="filter_text">{{city.display}}</option>
+      </select>
+      <p style="visibility: hidden;  height: 0">
+        <span> You selected:</span> <b>
+        {{selectedCity}}
+      </b>
+      </p>
+    </div>
+  </div>
+
+  <div class="">
+    <div class="filter-head">
+      <div class="filter_title_container">
+        <h3 class="subsection_heading filter_title">Date</h3>
+      </div>
+    </div>
+    <div class="filter_body">
+      <input [(ngModel)]="dateRange" bsDaterangepicker id="dateRange" name="dateRange" type="text"/>
+    </div>
+  </div>
 </div>
