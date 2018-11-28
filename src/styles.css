@@ -6,6 +6,7 @@
   --text-color-primary-dark: #212121;
   --text-color-primary-light: #3D446577;
   --text-color-primary-normal: #3D4465FF;
+  --text-color-disabled-normal: #777777;
   --accent-color-dark: #5D78FF;
   --accent-color-light: rgba(93, 120, 255, 0.1);
   --accent-color-normal: #6CB2EE77;
@@ -105,21 +106,26 @@ html {
   padding: 16px
 }
 
-.padding_5px{
+.padding_5px {
   padding: 5px;
 }
-.color_red{
+
+.color_red {
   color: #f16262;
 }
-.color_blue{
+
+.color_blue {
   color: var(--accent-color-normal);
 }
-.margin_3px{
-  margin:3px;
+
+.margin_3px {
+  margin: 3px;
 }
-.font_family{
+
+.font_family {
   font-family: Arvo, Roboto, Helvetica, sans-serif;
 }
-.timestamp_color{
-  color:#808080
+
+.timestamp_color {
+  color: #808080
 }

@@ -2,12 +2,14 @@
   <div>
     <div class="input-group input-group-lg">
     <span class="input-group-btn" style="cursor: default !important; visibility: visible">
-        <button (click)="performSearch(searchPageQuery)" class="btn btn-default search_icon" style="cursor: default !important;"
+        <button (click)="performSearch(searchPageQuery)" class="btn btn-default search_icon"
+                style="cursor: default !important;"
                 type="button">
           <i class="material-icons" style="cursor: default !important;">search</i>
         </button>
       </span>
-      <input [(ngModel)]="searchPageQuery" (keyup.enter)="performSearch(searchPageQuery)" class="form-control search_input search_input_text"
+      <input (keyup.enter)="performSearch(searchPageQuery)" [(ngModel)]="searchPageQuery"
+             class="form-control search_input search_input_text"
              placeholder="What are you looking for?" type="text">
     </div>
   </div>

@@ -11,6 +11,8 @@ import {HashtagComponent} from './component/hashtags/hashtag.component';
 import {SearchComponent} from './component/search/search.component';
 import {HomeComponent} from './component/home/home.component';
 import {SearchQueryComponent} from './component/search-query/search-query.component';
+import {FilterComponent} from './component/filter/filter.component';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -20,14 +22,16 @@ import {SearchQueryComponent} from './component/search-query/search-query.compon
     HashtagComponent,
     SearchComponent,
     HomeComponent,
-    SearchQueryComponent
+    SearchQueryComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
