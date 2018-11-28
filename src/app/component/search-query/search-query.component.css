@@ -91,3 +91,7 @@
   font-weight: 400;
 }
 
+.dropdown-menu.show {
+  width: 100% !important;
+}
+

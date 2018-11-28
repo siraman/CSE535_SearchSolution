@@ -6,10 +6,10 @@ import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  templateUrl: './search-result.component.html',
+  styleUrls: ['./search-result.component.css']
 })
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchResultComponent implements OnInit, OnDestroy {
   query: string;
   results: Tweet[];
   pageSize = 10;
@@ -54,7 +54,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.locationService.replaceState(this.locationService.path());
     if (searchQuery) {
       this.getTweets(searchQuery, 1, this.pageSize);
-      return this.router.navigate(['/search-results']);
+      return this.router.navigate(['/search-result-results']);
     }
   }
 
