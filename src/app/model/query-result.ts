@@ -39,7 +39,7 @@ export interface Tweet {
   possibly_sensitive?: boolean;
   retweeted_status?: RetweetedStatus;
   extended_entities?: TweetExtendedEntities;
-  query_metadata?: QueryMetadata;
+  queryMetadata?: QueryMetadata;
 }
 
 export interface TweetEntities {
@@ -310,30 +310,30 @@ export interface IBaseApiCall {
 class QueryMetadata {
   public query: string;
 
-  public queryTime: number;
+  public query_time: number;
 
-  public queryTopic: string;
+  public query_topic: string;
 
-  public queryCity: string;
+  public query_city: string;
 
-  public queryLanguage: string;
+  public query_language: string;
 
-  public queryCityRange: string;
+  public query_city_range: string;
 
   public constructor(query: string, queryTime: number, queryTopic: string, queryCity: string, queryLanguage: string
     , queryCityRange: string) {
     this.query = null;
-    this.queryTime = 0;
-    this.queryTopic = null;
-    this.queryCity = null;
-    this.queryLanguage = null;
-    this.queryCityRange = null;
+    this.query_time = 0;
+    this.query_topic = null;
+    this.query_city = null;
+    this.query_language = null;
+    this.query_city_range = null;
     this.query = query;
-    this.queryTime = queryTime;
-    this.queryTopic = queryTopic;
-    this.queryCity = queryCity;
-    this.queryLanguage = queryLanguage;
-    this.queryCityRange = queryCityRange;
+    this.query_time = queryTime;
+    this.query_topic = queryTopic;
+    this.query_city = queryCity;
+    this.query_language = queryLanguage;
+    this.query_city_range = queryCityRange;
   }
 }
 // Converts JSON strings to/from your types
