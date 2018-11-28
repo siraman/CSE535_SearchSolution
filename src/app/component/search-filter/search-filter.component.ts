@@ -4,10 +4,10 @@ import {FilterInputModelGenerator} from '../../query/filters/filter-input-model-
 
 @Component({
   selector: 'app-filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  templateUrl: './search-filter.component.html',
+  styleUrls: ['./search-filter.component.css']
 })
-export class FilterComponent implements OnInit {
+export class SearchFilterComponent implements OnInit {
   selectedLanguage = '';
   selectedCity = '';
   selectedTopic = '';
