@@ -1,0 +1,18 @@
+<div (click)="onItemClick()">
+  <div><a class="subsubsection_heading" data-target="#exampleModal" data-toggle="modal"
+          title="{{tweet.text}}">{{tweet.text}}</a></div>
+  <div class="clearfix">
+    <div class="font_family float-left timestamp_color">{{tweet.created_at}}</div>
+    <div class="float-right">
+      <i aria-hidden="true" class="fa fa-retweet color_blue margin_3px"
+         title="retweeted">{{tweet.retweet_count}}</i>
+      <i aria-hidden="true" class="fa fa-heart color_red margin_3px"
+         title="favorite">{{tweet.favorite_count}}</i>
+      <!--<i class="fa fa-heart" aria-hidden="true">{{tweet.favorite_count}}</i>-->
+      <!--<i class="fa fa-location-arrow" aria-hidden="true">{{tweet.queryMetadata.query_city}}</i>-->
+    </div>
+  </div>
+  <div class="clearfix font_family">
+    {{tweet.text}}
+  </div>
+</div>

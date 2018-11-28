@@ -48,6 +48,8 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.getTweets(query, 1, this.pageSize);
   }
 
+
+
   ngOnInit() {
     const searchQuery = this.activatedRoute.snapshot.queryParams['query'];
     this.query = searchQuery;

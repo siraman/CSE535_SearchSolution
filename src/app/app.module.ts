@@ -13,7 +13,8 @@ import {HomeComponent} from './component/home/home.component';
 import {SearchQueryComponent} from './component/search-query/search-query.component';
 import {SearchFilterComponent} from './component/search-filter/search-filter.component';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
-import {SearchComponent} from './component/search/search.component';
+import { SearchResultItemComponent } from './component/search-result-item/search-result-item.component';
+import { TweetDisplayComponent } from './component/tweet-display/tweet-display.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {SearchComponent} from './component/search/search.component';
     HomeComponent,
     SearchQueryComponent,
     SearchFilterComponent,
-    SearchComponent,
+    SearchResultItemComponent,
+    TweetDisplayComponent,
   ],
   imports: [
     BrowserModule,
