@@ -1,16 +1,24 @@
 <div (click)="onItemClick()" class="search-result-item-container padding_0px col-lg-12">
-  <div class="search-result-item-title-container search-result-item-title col-lg-12">{{tweet.text_filtered}}</div>
+  <div
+    class="search-result-item-title-container search-result-item-title col-lg-12">{{tweet.text_filtered.slice(0, tweet.text_filtered.indexOf('.'))}}</div>
+
+  <div class="search-result-item-link-container col-lg-12">
+    <a class="search-result-item-link" href="https://twitter.com/{{tweet['user.screen_name']}}/status/{{tweet.id}}">https://twitter.com/{{tweet['user.screen_name']}}
+      /status/{{tweet.id}}</a>
+  </div>
   <div *ngIf="tweet['entities.hashtags.text']" class="search-result-item-hashtags-container padding_0px col-lg-12">
     <span *ngFor="let hashtag of tweet['entities.hashtags.text']" class="hashtag hashtag_text">
       #{{hashtag}}
     </span>
   </div>
+
   <div *ngIf="!tweet['entities.hashtags.text'] && tweet['entities.user_mentions.screen_name']"
        class="search-result-item-hashtags-container padding_0px col-lg-12">
     <span *ngFor="let usermention of tweet['entities.user_mentions.screen_name']" class="hashtag hashtag_text">
       @{{usermention}}
     </span>
   </div>
+
   <div
     *ngIf="!tweet['entities.hashtags.text'] && !tweet['entities.user_mentions.screen_name'] && tweet['entities.urls.display_url']"
     class="search-result-item-hashtags-container padding_0px col-lg-12">
@@ -24,21 +32,20 @@
   </div>
 
 
-  <div class="search-result-item-date-container search-result-item-date padding_0px col-lg-12">
-    {{tweet.created_at | date:'dd MMM, yyyy hh:mm a'}}
-  </div>
-
-
-  <div class="clearfix">
-    <div class="font_family float-left timestamp_color">{{tweet.created_at | date:'dd MMM, yyyy hh:mm a'}}</div>
-    <div class="float-right">
-      <i aria-hidden="true" class="fa fa-retweet color_blue margin_3px"
-         title="retweeted">{{tweet.retweet_count}}</i>
-      <i aria-hidden="true" class="fa fa-heart color_red margin_3px"
-         title="favorite">{{tweet.favorite_count}}</i>
-      <!--<i class="fa fa-heart" aria-hidden="true">{{tweet.favorite_count}}</i>-->
-      <!--<i class="fa fa-location-arrow" aria-hidden="true">{{tweet.queryMetadata.query_city}}</i>-->
+  <div class="col-lg-12 padding_0px">
+    <div class="search-result-item-date-container search-result-item-date"
+         style="display: flex; justify-content: space-between">
+      <div style="display: flex;">
+        <span class="fas fa-retweet" style="vertical-align: middle;line-height: inherit; margin-top: 1px;"></span>
+        <div style="padding-right: 8px; padding-left: 8px;">{{tweet.retweet_count}}</div>
+      </div>
+      <div style="display: flex;">
+        <span class="fas fa-heart" style="vertical-align: middle;line-height: inherit; margin-top: 1px;"></span>
+        <div style="padding-right: 8px; padding-left: 8px;">{{tweet.favorite_count}}</div>
+      </div>
+      <div>
+        {{tweet.created_at | date:'dd MMM, yyyy hh:mm a'}}
+      </div>
     </div>
   </div>
-
 </div>
