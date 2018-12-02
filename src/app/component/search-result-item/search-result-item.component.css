@@ -1,0 +1,78 @@
+.search-result-item-container {
+  border-bottom: 1px solid var(--border-color-default);
+  background: var(--background-color-white);
+  box-shadow: 0 0 13px 0 rgba(82, 63, 105, 0.05);
+  border-radius: 4px;
+  margin-top: 32px;
+  cursor: pointer;
+}
+
+.search-result-item-container:hover {
+  box-shadow: 0 0 13px 0 var(--accent-color-hover);
+}
+
+.search-result-item-title-container {
+  padding: 32px 8px 8px 8px;
+}
+
+.search-result-item-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arvo, Roboto, Helvetica, sans-serif;
+  color: var(--text-color-primary-normal);
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: normal;
+}
+
+.search-result-item-body-container {
+  padding: 8px 16px;
+}
+
+.search-result-item-body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arvo, Roboto, Helvetica, sans-serif;
+  color: var(--text-color-primary-normal);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: normal;
+}
+
+.search-result-item-hashtags-container {
+  padding: 8px 16px;
+}
+
+.search-result-item-date-container {
+  padding: 8px 16px;
+  margin-left: 16px;
+  margin-right: 16px;
+  border-top: 1px solid var(--border-color-default);
+}
+
+.search-result-item-date {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arvo, Roboto, Helvetica, sans-serif;
+  color: var(--text-color-disabled-normal);
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: normal;
+  text-transform: capitalize;
+}
+
+.hashtag {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px 4px;
+  margin: 5px 5px 5px 0;
+  background-color: var(--accent-color-light);
+  color: var(--accent-color-dark);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.hashtag:hover {
+  background-color: rgba(93, 120, 255, 0.3);
+}
+
+.hashtag_text {
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arvo, Roboto, Helvetica, sans-serif;
+}

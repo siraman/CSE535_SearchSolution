@@ -1,15 +1,17 @@
+.filter_container {
+  background: var(--background-color-white);
+  height: 100%;
+}
+
 .filter_container_head {
-  padding: 0 15px;
-  height: 50px;
+  padding: 24px 15px;
   margin-bottom: 15px;
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border-color-default);
 }
 
 .filter_container_head_title_container {
-  min-height: 49px;
   display: flex;
   align-items: center;
 }
@@ -19,9 +21,13 @@
   margin: 0;
   color: var(--text-color-primary-normal) !important;
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   line-height: 1.8;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arvo, Roboto, Helvetica, sans-serif;
+}
+
+.filter_type_container {
+  margin-top: 24px;
 }
 
 .filter-head {
@@ -39,16 +45,16 @@
 }
 
 .filter_title {
-  padding: 0;
+  padding: 0 8px;
   margin: 0;
-  color: var(--text-color-primary-normal) !important;
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1.5;
+  color: var(--text-color-disabled-dark) !important;
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 2;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arvo, Roboto, Helvetica, sans-serif;
 }
 
-.filter_symbol_container {
+.filter_clear_all_container {
   min-height: 49px;
   display: flex;
   align-items: center;
@@ -59,6 +65,50 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 0px 15px;
+}
+
+.filter-button-style {
+  text-align: left;
+  background: var(--background-color-white);
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arvo, Roboto, Helvetica, sans-serif;
+  color: var(--text-color-disabled-normal);
+  border: 1px solid var(--border-color-default);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.filter-button-style:hover {
+  color: var(--accent-color-dark);
+  border: 1px solid var(--accent-color-hover);
+  background: var(--background-color-white);
+}
+
+.filter-button-style:active {
+  color: var(--accent-color-dark);
+  border: 1px solid var(--accent-color-hover);
+  background: var(--background-color-white);
+}
+
+.filter-button-style:show {
+  color: var(--accent-color-dark);
+  border: 1px solid var(--accent-color-hover);
+  background: var(--background-color-white);
+}
+
+
+.btn-secondary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0;
+}
+
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+  color: var(--accent-color-dark);
+  border: 1px solid var(--accent-color-hover);
+  background: var(--background-color-white);
 }
 
 .filter {
@@ -80,7 +130,7 @@
 }
 
 .filter_text {
-  font-size: 1rem;
+  font-size: 1.5rem;
   text-transform: none;
   font-weight: 400;
   line-height: 1.5;
@@ -96,9 +146,10 @@ select:focus {
 }
 
 .filter_clear_button {
+  cursor: pointer;
   background: transparent;
   border: 0;
-  font-size: 1rem;
+  font-size: 1.25rem;
   text-transform: none;
   font-weight: 500;
   line-height: 1;
@@ -109,7 +160,23 @@ select:focus {
 }
 
 .filter_clear_button:hover {
+  cursor: pointer;
   background: transparent;
   border: 0;
   color: var(--accent-color-dark);
+}
+
+.filter_clear_button:active {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: var(--accent-color-dark);
+  font-weight: 700;
+}
+
+
+.filter_clear_container {
+  min-height: 39px;
+  display: flex;
+  align-items: center;
 }

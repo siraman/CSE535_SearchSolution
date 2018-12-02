@@ -14,7 +14,7 @@ export class QueryComponent implements OnInit {
   constructor(private router: Router) {
   }
   performSearch(query) {
-    return this.router.navigate(['/search-result-results'], {queryParams: {query: query}});
+    return this.router.navigate(['/search'], {queryParams: {query: query}});
   }
 
   ngOnInit() {

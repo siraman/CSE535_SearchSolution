@@ -1,46 +1,48 @@
-<div class="application_background_off_white search_container">
+<div class="search_container">
 
-  <app-search-query (queryChange)="captureEvent($event)"></app-search-query>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-        <div *ngIf="searched" class="font_family padding_5px"> {{totalTweets}} results found</div>
-        <div *ngIf="totalTweets > 0">
-          <div
-            *ngFor="let result of results | paginate: { id: 'server', itemsPerPage: 10, currentPage: currentPage, totalItems: totalTweets}"
-            class="result-card application_white_container">
+  <div *ngIf="searched" class="result_summary col-lg-12"> {{totalTweets}} results found for "{{query}}"</div>
 
-            <app-search-result-item [tweet] = result></app-search-result-item>
-          </div>
-          <div class="text-center pagination-container">
-            <pagination-controls (pageChange)="getPage($event)" autoHide="true" directionLinks='true' id='server'
-                                 nextLabel="" previousLabel="" responsive="true"></pagination-controls>
-          </div>
-
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+  <div *ngIf="totalTweets > 0">
+    <div
+      *ngFor="let result of results | paginate: { id: 'server', itemsPerPage: 10, currentPage: currentPage, totalItems: totalTweets}">
+      <app-search-result-item [tweet]=result></app-search-result-item>
+    </div>
+    <div class="text-center pagination-container">
+      <pagination-controls (pageChange)="getPage($event)" autoHide="true" directionLinks='true' id='server'
+                           nextLabel="" previousLabel="" responsive="true"></pagination-controls>
     </div>
   </div>
-  <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog"
-       tabindex="-1">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tweet Details</h5>
-          <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
 </div>
+
+
+<!--<div class="application_background_off_white search_container">-->
+
+
+<!--<div class="row">-->
+
+
+<!---->
+<!--</div>-->
+<!--<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog"-->
+<!--tabindex="-1">-->
+<!--<div class="modal-dialog" role="document">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<h5 class="modal-title" id="exampleModalLabel">Tweet Details</h5>-->
+<!--<button aria-label="Close" class="close" data-dismiss="modal" type="button">-->
+<!--<span aria-hidden="true">&times;</span>-->
+<!--</button>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--...-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
