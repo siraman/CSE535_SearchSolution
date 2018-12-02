@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 export class SearchQueryComponent implements OnInit {
 
   searchPageQuery: string;
-  @Output() queryChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() queryChange: EventEmitter<string> = new EventEmitter<string>();
   constructor(private router: Router) {
   }
 
@@ -19,5 +19,4 @@ export class SearchQueryComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

@@ -1,8 +1,36 @@
-<div (click)="onItemClick()">
-  <div><a class="subsubsection_heading" data-target="#exampleModal" data-toggle="modal"
-          title="{{tweet.text}}">{{tweet.text}}</a></div>
+<div (click)="onItemClick()" class="search-result-item-container padding_0px col-lg-12">
+  <div class="search-result-item-title-container search-result-item-title col-lg-12">{{tweet.text | slice:0:10}}</div>
+  <div *ngIf="tweet['entities.hashtags.text']" class="search-result-item-hashtags-container padding_0px col-lg-12">
+    <span *ngFor="let hashtag of tweet['entities.hashtags.text']" class="hashtag hashtag_text">
+      #{{hashtag}}
+    </span>
+  </div>
+  <div *ngIf="!tweet['entities.hashtags.text'] && tweet['entities.user_mentions.screen_name']"
+       class="search-result-item-hashtags-container padding_0px col-lg-12">
+    <span *ngFor="let usermention of tweet['entities.user_mentions.screen_name']" class="hashtag hashtag_text">
+      @{{usermention}}
+    </span>
+  </div>
+  <div
+    *ngIf="!tweet['entities.hashtags.text'] && !tweet['entities.user_mentions.screen_name'] && tweet['entities.urls.display_url']"
+    class="search-result-item-hashtags-container padding_0px col-lg-12">
+    <span *ngFor="let url of tweet['entities.urls.display_url']" class="hashtag hashtag_text">
+      {{url}}
+    </span>
+  </div>
+
+  <div class="search-result-item-body-container search-result-item-body padding_0px col-lg-12">
+    {{tweet.text}}
+  </div>
+
+
+  <div class="search-result-item-date-container search-result-item-date padding_0px col-lg-12">
+    {{tweet.created_at | date:'dd MMM, yyyy hh:mm a'}}
+  </div>
+
+
   <div class="clearfix">
-    <div class="font_family float-left timestamp_color">{{tweet.created_at}}</div>
+    <div class="font_family float-left timestamp_color">{{tweet.created_at | date:'dd MMM, yyyy hh:mm a'}}</div>
     <div class="float-right">
       <i aria-hidden="true" class="fa fa-retweet color_blue margin_3px"
          title="retweeted">{{tweet.retweet_count}}</i>
@@ -12,7 +40,5 @@
       <!--<i class="fa fa-location-arrow" aria-hidden="true">{{tweet.queryMetadata.query_city}}</i>-->
     </div>
   </div>
-  <div class="clearfix font_family">
-    {{tweet.text}}
-  </div>
+
 </div>

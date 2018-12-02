@@ -3,7 +3,7 @@ import {FilterInputModel} from '../../query/filters/filter-input-model';
 import {FilterInputModelGenerator} from '../../query/filters/filter-input-model-generator';
 
 @Component({
-  selector: 'app-filter',
+  selector: 'app-search-filter',
   templateUrl: './search-filter.component.html',
   styleUrls: ['./search-filter.component.css']
 })

@@ -7,6 +7,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
+  query: string;
+
+  captureQueryChangeEvent(event) {
+    console.log(event);
+    this.query = event;
+  }
+
   constructor() {
   }
 
