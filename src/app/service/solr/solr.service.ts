@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {SolrUrlConstants} from '../../util/url-constants';
 import {QueryResponse} from '../../model/query-result';
+import {Query} from '../../model/query';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +26,26 @@ export class SolrService {
     return this.httpClient.get<HashtagFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, options);
   }
 
-  getSearchResults(query, pageNumber, pageSize): Observable<QueryResponse> {
+  getSearchResults(query, pageNumber, pageSize, queryObj: Query): Observable<QueryResponse> {
     const start = (pageNumber - 1) * (pageSize);
-    const queryParams = {params: new HttpParams()
-        .set('start', start.toString())
-        .set('rows', pageSize.toString())
-        .set('q', 'text:' + query  )};
-    return this.httpClient.get<QueryResponse>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParams);
+
+    if (query) {
+      const queryParams = {
+        params: new HttpParams()
+          .set('start', start.toString())
+          .set('rows', pageSize.toString())
+          .set('q', query)
+      };
+      return this.httpClient.get<QueryResponse>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParams);
+    } else {
+
+      const queryParams = {
+        params: new HttpParams()
+          .set('start', start.toString())
+          .set('rows', pageSize.toString())
+          .set('q', queryObj.focusArea + ':' + queryObj.key + ',' + 'entities.hashtags.text:' + queryObj.value)
+      };
+      return this.httpClient.get<QueryResponse>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParams);
+    }
   }
 }
