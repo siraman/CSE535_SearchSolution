@@ -26,7 +26,7 @@
         <button aria-expanded="false" aria-haspopup="true"
                 class="btn btn-secondary dropdown-toggle btn-block filter-button-style" data-toggle="dropdown"
                 type="button">
-          Select a topic
+          {{selectedTopic != null ? selectedTopic.display : 'Select a topic'}}
         </button>
         <div aria-labelledby="dropdownMenuButton" class="dropdown-menu w-100">
           <a *ngFor="let topic of filterInputModelListOfTopic" class="dropdown-item filter_text"
@@ -52,7 +52,7 @@
         <button aria-expanded="false" aria-haspopup="true"
                 class="btn btn-secondary dropdown-toggle btn-block filter-button-style" data-toggle="dropdown"
                 type="button">
-          Select a language
+          {{selectedLanguage != null ? selectedLanguage.display : 'Select a language'}}
         </button>
         <div aria-labelledby="dropdownMenuButton" class="dropdown-menu w-100">
           <a *ngFor="let language of filterInputModelListOfLanguage" class="dropdown-item filter_text"
@@ -76,15 +76,13 @@
         <button aria-expanded="false" aria-haspopup="true"
                 class="btn btn-secondary dropdown-toggle btn-block filter-button-style" data-toggle="dropdown"
                 type="button">
-          Select a city
+          {{selectedCity != null ? selectedCity.display : 'Select a city'}}
         </button>
         <div aria-labelledby="dropdownMenuButton" class="dropdown-menu w-100">
           <a *ngFor="let city of filterInputModelListOfCity" class="dropdown-item filter_text"
              (click)="selectNewCity(city)">{{city.display}}</a>
         </div>
       </div>
-
-
     </div>
   </div>
 
@@ -101,7 +99,11 @@
       </div>
     </div>
     <div class="filter_body">
-      <input [(ngModel)]="dateRange" bsDaterangepicker id="dateRange" name="dateRange" type="text"/>
+      <input #dp="bsDaterangepicker" [bsConfig]="bsConfig" [maxDate]="maxDate" aria-expanded="false"
+             aria-haspopup="true" bsDatepicker
+             bsDaterangepicker class="btn btn-secondary dropdown-toggle btn-block
+             filter-datepicker-height filter-button-style"
+             placement="right" type="textarea"/>
     </div>
   </div>
 </div>

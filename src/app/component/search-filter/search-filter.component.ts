@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FilterInputModel} from '../../query/filters/filter-input-model';
 import {FilterInputModelGenerator} from '../../query/filters/filter-input-model-generator';
 import {FilterType} from '../../query/filters/filter-type';
+import {BsDatepickerConfig} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-search-filter',
@@ -21,7 +22,22 @@ export class SearchFilterComponent implements OnInit {
 
   @Output() filtersEvent: EventEmitter<FilterInputModel[]> = new EventEmitter<FilterInputModel[]>();
 
+  bsConfig: Partial<BsDatepickerConfig>;
+  bsValue = new Date();
+  bsRangeValue: Date[];
+  maxDate = new Date();
+
+  // maxDate: Date;
   constructor() {
+    this.bsConfig = Object.assign({},
+      {
+        containerClass: 'theme-dark-blue',
+        dateInputFormat: 'yyyy-mm-ddThh:mm:ssZ'
+      });
+    // this.maxDate = new Date();
+    // this.maxDate.setDate(this.maxDate.getDate());
+    // this.maxDate.setDate(this.maxDate.getDate() + 7);
+    // this.bsRangeValue = [this.bsValue, this.maxDate];
   }
 
   ngOnInit() {
@@ -32,40 +48,53 @@ export class SearchFilterComponent implements OnInit {
 
   selectNewCity(city: FilterInputModel) {
     console.log(city.display);
-    // this.filtersEventObjectList.forEach(filtersEventObject => {
-    //   if (filtersEventObject.filter_type === FilterType.FILTER_TYPE_CITY) {
-    //     filtersEventObject.code = city.code;
-    //     filtersEventObject.display = city.display;
-    //     this.filtersEvent.emit(this.filtersEventObjectList);
-    //     this.selectedCity = city;
-    //     return;
-    //   }
-    // });
+    this.filtersEventObjectList.forEach(filtersEventObject => {
+      if (filtersEventObject.filter_type === FilterType.FILTER_TYPE_CITY) {
+        filtersEventObject.code = city.code;
+        filtersEventObject.display = city.display;
+        this.filtersEvent.emit(this.filtersEventObjectList);
+        this.selectedCity = city;
+        return;
+      }
+    });
+
+    this.filtersEventObjectList.push(new FilterInputModel(city.display, city.code, city.filter_type));
+    this.filtersEvent.emit(this.filtersEventObjectList);
+    this.selectedCity = city;
+    return;
   }
 
   selectNewLanguage(language: FilterInputModel) {
     console.log(language.display);
-    // this.filtersEventObjectList.forEach(filtersEventObject => {
-    //   if (filtersEventObject.filter_type === FilterType.FILTER_TYPE_LANGUAGE) {
-    //     filtersEventObject.code = language.code;
-    //     filtersEventObject.display = language.display;
-    //     this.filtersEvent.emit(this.filtersEventObjectList);
-    //     this.selectedLanguage = language;
-    //     return;
-    //   }
-    // });
+    this.filtersEventObjectList.forEach(filtersEventObject => {
+      if (filtersEventObject.filter_type === FilterType.FILTER_TYPE_LANGUAGE) {
+        filtersEventObject.code = language.code;
+        filtersEventObject.display = language.display;
+        this.filtersEvent.emit(this.filtersEventObjectList);
+        this.selectedLanguage = language;
+        return;
+      }
+    });
+    this.filtersEventObjectList.push(new FilterInputModel(language.display, language.code, language.filter_type));
+    this.filtersEvent.emit(this.filtersEventObjectList);
+    this.selectedLanguage = language;
+    return;
   }
 
   selectNewTopic(topic: FilterInputModel) {
     console.log(topic.display);
-    // this.filtersEventObjectList.forEach(filtersEventObject => {
-    //   if (filtersEventObject.filter_type === FilterType.FILTER_TYPE_TOPIC) {
-    //     filtersEventObject.code = topic.code;
-    //     filtersEventObject.display = topic.display;
-    //     this.filtersEvent.emit(this.filtersEventObjectList);
-    //     this.selectedTopic = topic;
-    //     return;
-    //   }
-    // });
+    this.filtersEventObjectList.forEach(filtersEventObject => {
+      if (filtersEventObject.filter_type === FilterType.FILTER_TYPE_TOPIC) {
+        filtersEventObject.code = topic.code;
+        filtersEventObject.display = topic.display;
+        this.filtersEvent.emit(this.filtersEventObjectList);
+        this.selectedTopic = topic;
+        return;
+      }
+    });
+    this.filtersEventObjectList.push(new FilterInputModel(topic.display, topic.code, topic.filter_type));
+    this.filtersEvent.emit(this.filtersEventObjectList);
+    this.selectedTopic = topic;
+    return;
   }
 }
