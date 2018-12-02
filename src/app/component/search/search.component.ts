@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -10,14 +11,14 @@ export class SearchComponent implements OnInit {
   query: string;
 
   captureQueryChangeEvent(event) {
-    console.log(event);
     this.query = event;
   }
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.query =  this.activatedRoute.snapshot.queryParams['query'];
   }
 
 }

@@ -3,6 +3,7 @@ import {SolrService} from '../../service/solr/solr.service';
 import {Tweet} from '../../model/query-result';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {Query} from '../../model/query';
 
 @Component({
   selector: 'app-search-result',
@@ -16,7 +17,6 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
   totalTweets = 0;
   currentPage = 1;
   searched = false;
-  test = '';
 
   constructor(private searchResults: SolrService,
               private router: Router,
@@ -24,9 +24,9 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
               private locationService: Location) {
   }
 
-  getTweets(query, pageNumber, pageSize) {
+  getTweets(query, pageNumber, pageSize, queryObj?: Query) {
     this.searched = true;
-    this.searchResults.getSearchResults(query, pageNumber, pageSize).subscribe(tweet => {
+    this.searchResults.getSearchResults(query, pageNumber, pageSize, queryObj).subscribe(tweet => {
       if (tweet.response != null) {
         this.results = tweet.response.docs;
         tweet.response.docs.forEach(tweet1 => {
@@ -45,7 +45,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
       if (changes.hasOwnProperty(propName)) {
         const change = changes[propName];
         const curVal = JSON.stringify(change.currentValue);
-        if (propName === 'query') {
+        if (!change.firstChange && propName === 'query') {
           this.getTweets(curVal, 1, this.pageSize);
         }
       }
@@ -61,12 +61,20 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit() {
-    const searchQuery = this.activatedRoute.snapshot.queryParams['query'];
-    this.query = searchQuery;
-    this.locationService.replaceState(this.locationService.path());
-    if (searchQuery) {
-      this.getTweets(searchQuery, 1, this.pageSize);
-      return this.router.navigate(['/search-result-results']);
+    const freeTextSearchQuery = this.activatedRoute.snapshot.queryParams['query'];
+    const topic = this.activatedRoute.snapshot.queryParams['topic'];
+    const hashTag = this.activatedRoute.snapshot.queryParams['hashtag'];
+    const focusArea = this.activatedRoute.snapshot.queryParams['focusArea'];
+    this.locationService.replaceState('/search');
+    if (freeTextSearchQuery) {
+      this.query = freeTextSearchQuery;
+      this.getTweets(freeTextSearchQuery, 1, this.pageSize);
+    } else {
+      const queryObject = new Query();
+      queryObject.key = topic;
+      queryObject.value = hashTag;
+      queryObject.focusArea = focusArea;
+      this.getTweets('', 1, this.pageSize, queryObject);
     }
   }
 
