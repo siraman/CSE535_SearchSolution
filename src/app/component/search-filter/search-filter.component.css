@@ -180,3 +180,17 @@ select:focus {
   display: flex;
   align-items: center;
 }
+
+
+.textarea {
+  width: 100%;
+  line-height: 1.5;
+}
+
+.filter-datepicker-height {
+  height: 100%;
+}
+
+.bs-datepicker-head {
+  color: #5D78FF !important;
+}

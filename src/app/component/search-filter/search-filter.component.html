@@ -101,7 +101,11 @@
       </div>
     </div>
     <div class="filter_body">
-      <input [(ngModel)]="dateRange" bsDaterangepicker id="dateRange" name="dateRange" type="text"/>
+      <input #dp="bsDaterangepicker" [bsConfig]="bsConfig" [maxDate]="maxDate" aria-expanded="false"
+             aria-haspopup="true" bsDatepicker
+             bsDaterangepicker class="btn btn-secondary dropdown-toggle btn-block
+             filter-datepicker-height filter-button-style"
+             placement="right" type="textarea"/>
     </div>
   </div>
 </div>
