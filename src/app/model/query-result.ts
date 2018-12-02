@@ -17,6 +17,7 @@ export interface Tweet {
   truncated: boolean;
   'entities.hashtags.text': string;
   'entities.urls.display_url': string;
+  text_filtered: string;
   entities: TweetEntities;
   source: string;
   in_reply_to_status_id: number | null;

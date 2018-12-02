@@ -1,5 +1,5 @@
 <div (click)="onItemClick()" class="search-result-item-container padding_0px col-lg-12">
-  <div class="search-result-item-title-container search-result-item-title col-lg-12">{{tweet.text | slice:0:10}}</div>
+  <div class="search-result-item-title-container search-result-item-title col-lg-12">{{tweet.text_filtered}}</div>
   <div *ngIf="tweet['entities.hashtags.text']" class="search-result-item-hashtags-container padding_0px col-lg-12">
     <span *ngFor="let hashtag of tweet['entities.hashtags.text']" class="hashtag hashtag_text">
       #{{hashtag}}

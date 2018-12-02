@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FilterInputModel} from '../../query/filters/filter-input-model';
 import {FilterInputModelGenerator} from '../../query/filters/filter-input-model-generator';
+import {FilterType} from '../../query/filters/filter-type';
 
 @Component({
   selector: 'app-search-filter',
@@ -8,61 +9,63 @@ import {FilterInputModelGenerator} from '../../query/filters/filter-input-model-
   styleUrls: ['./search-filter.component.css']
 })
 export class SearchFilterComponent implements OnInit {
-  selectedLanguage = '';
-  selectedCity = '';
-  selectedTopic = '';
+  selectedLanguage: FilterInputModel;
+  selectedCity: FilterInputModel;
+  selectedTopic: FilterInputModel;
   event_value = '';
   filterInputModelListOfCity: FilterInputModel[] = [];
   filterInputModelListOfLanguage: FilterInputModel[] = [];
   filterInputModelListOfTopic: FilterInputModel[] = [];
+
+  filtersEventObjectList: FilterInputModel[] = [];
+
+  @Output() filtersEvent: EventEmitter<FilterInputModel[]> = new EventEmitter<FilterInputModel[]>();
+
   constructor() {
   }
 
   ngOnInit() {
-    this.filterInputModelListOfCity = FilterInputModelGenerator.getListOfInputModels('city');
-    this.filterInputModelListOfLanguage = FilterInputModelGenerator.getListOfInputModels('language');
-    this.filterInputModelListOfTopic = FilterInputModelGenerator.getListOfInputModels('topic');
+    this.filterInputModelListOfCity = FilterInputModelGenerator.getListOfInputModels(FilterType.FILTER_TYPE_CITY);
+    this.filterInputModelListOfLanguage = FilterInputModelGenerator.getListOfInputModels(FilterType.FILTER_TYPE_LANGUAGE);
+    this.filterInputModelListOfTopic = FilterInputModelGenerator.getListOfInputModels(FilterType.FILTER_TYPE_TOPIC);
   }
 
-  selectChangeHandlerLanguage(event: any) {
-    this.event_value = event.target.value;
-    if (this.event_value === 'English') {
-      this.selectedLanguage = 'en';
-    }
-    if (this.event_value === 'Hindi') {
-      this.selectedLanguage = 'hi';
-    }
-    if (this.event_value === 'French') {
-      this.selectedLanguage = 'fr';
-    }
-    if (this.event_value === 'Thai') {
-      this.selectedLanguage = 'th';
-    }
-    if (this.event_value === 'Spanish') {
-      this.selectedLanguage = 'es';
-    }
+  selectNewCity(city: FilterInputModel) {
+    console.log(city.display);
+    // this.filtersEventObjectList.forEach(filtersEventObject => {
+    //   if (filtersEventObject.filter_type === FilterType.FILTER_TYPE_CITY) {
+    //     filtersEventObject.code = city.code;
+    //     filtersEventObject.display = city.display;
+    //     this.filtersEvent.emit(this.filtersEventObjectList);
+    //     this.selectedCity = city;
+    //     return;
+    //   }
+    // });
   }
 
-  selectChangeHandlerTopic(event: any) {
-    this.selectedTopic = event.target.value;
+  selectNewLanguage(language: FilterInputModel) {
+    console.log(language.display);
+    // this.filtersEventObjectList.forEach(filtersEventObject => {
+    //   if (filtersEventObject.filter_type === FilterType.FILTER_TYPE_LANGUAGE) {
+    //     filtersEventObject.code = language.code;
+    //     filtersEventObject.display = language.display;
+    //     this.filtersEvent.emit(this.filtersEventObjectList);
+    //     this.selectedLanguage = language;
+    //     return;
+    //   }
+    // });
   }
 
-  selectChangeHandlerCity(event: any) {
-    this.event_value = event.target.value;
-    if (this.event_value === 'New York City') {
-      this.selectedCity = 'nyc';
-    }
-    if (this.event_value === 'Delhi') {
-      this.selectedCity = 'delhi';
-    }
-    if (this.event_value === 'Paris') {
-      this.selectedCity = 'paris';
-    }
-    if (this.event_value === 'Bangkok') {
-      this.selectedCity = 'bangkok';
-    }
-    if (this.event_value === 'Mexico City') {
-      this.selectedCity = 'mexico city';
-    }
+  selectNewTopic(topic: FilterInputModel) {
+    console.log(topic.display);
+    // this.filtersEventObjectList.forEach(filtersEventObject => {
+    //   if (filtersEventObject.filter_type === FilterType.FILTER_TYPE_TOPIC) {
+    //     filtersEventObject.code = topic.code;
+    //     filtersEventObject.display = topic.display;
+    //     this.filtersEvent.emit(this.filtersEventObjectList);
+    //     this.selectedTopic = topic;
+    //     return;
+    //   }
+    // });
   }
 }
