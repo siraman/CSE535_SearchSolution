@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -8,16 +8,16 @@ import {Router} from '@angular/router';
 })
 export class SearchQueryComponent implements OnInit {
 
-  searchPageQuery: string;
-  @Output() queryChange: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private router: Router) {
+  @Input() searchPageQuery: string;
+  @Output() queryChange: EventEmitter<string> = new EventEmitter<string>();
+  constructor() {
   }
 
   performSearch(query) {
+    this.searchPageQuery = query;
     this.queryChange.emit(query);
   }
 
   ngOnInit() {
   }
-
 }

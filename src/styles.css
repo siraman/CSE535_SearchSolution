@@ -6,8 +6,11 @@
   --text-color-primary-dark: #212121;
   --text-color-primary-light: #3D446577;
   --text-color-primary-normal: #3D4465FF;
+  --text-color-disabled-dark: #555555;
+  --text-color-disabled-normal: #777777;
   --accent-color-dark: #5D78FF;
   --accent-color-light: rgba(93, 120, 255, 0.1);
+  --accent-color-hover: rgba(93, 120, 255, 0.5);
   --accent-color-normal: #6CB2EE77;
 
 
@@ -19,6 +22,17 @@
   --sub_sub_section_heading_size: 16px;
   --body_text_size: 14px;
   --body_text_size_small: 12px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                   supported by Chrome and Opera */
 }
 
 
@@ -105,21 +119,34 @@ html {
   padding: 16px
 }
 
-.padding_5px{
+.padding_5px {
   padding: 5px;
 }
-.color_red{
+
+.padding_0px {
+  padding: 0;
+}
+
+.color_red {
   color: #f16262;
 }
-.color_blue{
+
+.color_blue {
   color: var(--accent-color-normal);
 }
-.margin_3px{
-  margin:3px;
+
+.margin_3px {
+  margin: 3px;
 }
-.font_family{
+
+.font_family {
   font-family: Arvo, Roboto, Helvetica, sans-serif;
 }
-.timestamp_color{
-  color:#808080
+
+.timestamp_color {
+  color: #808080
+}
+
+.cursor_pointer, cursor_pointer:hover{
+  cursor: pointer;
 }

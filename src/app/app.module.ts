@@ -7,10 +7,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {TweetComponent} from './component/tweet/tweet.component';
 import {QueryComponent} from './component/query/query.component';
-import {HashtagComponent} from './component/hashtags/hashtag.component';
 import {SearchComponent} from './component/search/search.component';
+import {HashtagComponent} from './component/hashtags/hashtag.component';
+import {SearchResultComponent} from './component/search-result/search-result.component';
 import {HomeComponent} from './component/home/home.component';
 import {SearchQueryComponent} from './component/search-query/search-query.component';
+import {SearchFilterComponent} from './component/search-filter/search-filter.component';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import {SearchResultItemComponent} from './component/search-result-item/search-result-item.component';
+import {TweetDisplayComponent} from './component/tweet-display/tweet-display.component';
+import {SearchAnalysisComponent} from './component/search-analysis/search-analysis.component';
 
 @NgModule({
   declarations: [
@@ -18,16 +24,22 @@ import {SearchQueryComponent} from './component/search-query/search-query.compon
     TweetComponent,
     QueryComponent,
     HashtagComponent,
-    SearchComponent,
     HomeComponent,
-    SearchQueryComponent
+    SearchComponent,
+    SearchQueryComponent,
+    SearchFilterComponent,
+    SearchResultComponent,
+    SearchResultItemComponent,
+    TweetDisplayComponent,
+    SearchAnalysisComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

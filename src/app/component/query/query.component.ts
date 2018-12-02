@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,11 +10,12 @@ export class QueryComponent implements OnInit {
 
   today: number;
   query: string;
+  @Output() freeTextSearch: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private router: Router) {
   }
   performSearch(query) {
-    return this.router.navigate(['/search-results'], {queryParams: {query: query}});
+    this.freeTextSearch.emit(query);
   }
 
   ngOnInit() {

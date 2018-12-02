@@ -15,6 +15,11 @@ export interface Tweet {
   text: string;
   full_text: string;
   truncated: boolean;
+  'entities.hashtags.text': string;
+  'entities.urls.display_url': string;
+  text_filtered: string;
+  'user.id': number;
+  'user.screen_name': string;
   entities: TweetEntities;
   source: string;
   in_reply_to_status_id: number | null;
