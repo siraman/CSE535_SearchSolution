@@ -141,7 +141,7 @@ export class SearchFilterComponent implements OnInit {
       }
     }
     if (value === 'date') {
-      this.clearDate = ' ';
+      this.clearDate.concat('Select a date');
       for (let index = 0; index < filtersLength; index++) {
         if (this.filtersEventObjectList[index] != null
           && this.filtersEventObjectList[index].filter_type === FilterType.FILTER_TYPE_DATE_RANGE) {
