@@ -26,18 +26,17 @@ export class SearchFilterComponent implements OnInit {
   bsValue = new Date();
   bsRangeValue: Date[];
   maxDate = new Date();
-
-  // maxDate: Date;
+  daterangepickerModel: Date[];
+  clearDate: string;
   constructor() {
     this.bsConfig = Object.assign({},
       {
         containerClass: 'theme-dark-blue',
         dateInputFormat: 'yyyy-mm-ddThh:mm:ssZ'
       });
-    // this.maxDate = new Date();
-    // this.maxDate.setDate(this.maxDate.getDate());
-    // this.maxDate.setDate(this.maxDate.getDate() + 7);
-    // this.bsRangeValue = [this.bsValue, this.maxDate];
+    this.maxDate.setDate(this.maxDate.getDate());
+    this.bsRangeValue = [this.bsValue, this.maxDate];
+    this.clearDate = 'Select a date';
   }
 
   ngOnInit() {
@@ -96,5 +95,26 @@ export class SearchFilterComponent implements OnInit {
     this.filtersEvent.emit(this.filtersEventObjectList);
     this.selectedTopic = topic;
     return;
+  }
+
+  clearText(value) {
+    if (value === 'topic') {
+      this.selectedTopic = null;
+    }
+    if (value === 'city') {
+      this.selectedCity = null;
+    }
+    if (value === 'language') {
+      this.selectedLanguage = null;
+    }
+    if (value === 'date') {
+      this.clearDate = ' ';
+    }
+    if (value === 'all') {
+      this.clearDate = ' ';
+      this.selectedLanguage = null;
+      this.selectedCity = null;
+      this.selectedTopic = null;
+    }
   }
 }
