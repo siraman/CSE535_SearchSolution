@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, DoCheck, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {SolrService} from '../../service/solr/solr.service';
 import {Tweet} from '../../model/query-result';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -11,9 +11,10 @@ import {FilterInputModel} from '../../query/filters/filter-input-model';
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.css']
 })
-export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
+export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCheck {
   @Input() query: string;
   @Input() filterQuery: FilterInputModel[];
+  hashTagQueryObject: Query;
   results: Tweet[];
   pageSize = 10;
   totalTweets = 0;
@@ -54,16 +55,18 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
         }
         if (propName === 'filterQuery') {
           const change = changes[propName];
-          if (!change.firstChange ) {
-            this.getTweets('', 1, this.pageSize, null, change.currentValue);
-          }
+          this.getTweets(this.query, 1, this.pageSize, null, change.currentValue);
         }
       }
     }
   }
 
+  ngDoCheck() {
+
+  }
+
   getPage(pageNumber: number) {
-    this.getTweets(this.query, pageNumber, this.pageSize);
+    this.getTweets(this.query, pageNumber, this.pageSize, this.hashTagQueryObject, this.filterQuery);
   }
 
   onSearch(query: string): void {
@@ -84,6 +87,7 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges {
       queryObject.key = topic;
       queryObject.value = hashTag;
       queryObject.focusArea = focusArea;
+      this.hashTagQueryObject = queryObject;
       this.getTweets('', 1, this.pageSize, queryObject);
     }
   }

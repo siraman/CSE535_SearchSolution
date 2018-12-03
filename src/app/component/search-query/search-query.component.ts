@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FilterInputModel} from '../../query/filters/filter-input-model';
 
 @Component({
   selector: 'app-search-query',
@@ -8,6 +9,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class SearchQueryComponent implements OnInit {
 
   @Input() searchPageQuery: string;
+  @Input() searchPageFilter: FilterInputModel[];
   @Output() queryChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {

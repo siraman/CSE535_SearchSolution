@@ -8,6 +8,7 @@ import {Query} from '../../model/query';
 import {FilterInputModel} from '../../query/filters/filter-input-model';
 import {FilterType} from '../../query/filters/filter-type';
 import {ApplicationConstants} from '../../util/application-constants';
+import {isNullOrUndefined} from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -32,38 +33,61 @@ export class SolrService {
   getSearchResults(query, pageNumber, pageSize, queryObj: Query, filterQuery?: FilterInputModel[]): Observable<QueryResponse> {
     const start = (pageNumber - 1) * (pageSize);
     const queryParameters = {
-      params: new HttpParams()
-    };
-    if (query) {
-      queryParameters.params = queryParameters.params.append('start', start.toString())
+      params: new HttpParams().append('start', start.toString())
         .append('rows', pageSize.toString())
+    };
+    if (!isNullOrUndefined(query) && query) {
+      queryParameters.params = queryParameters.params
         .append('q', query);
     }
-    if (filterQuery != null) {
+    if (!isNullOrUndefined(filterQuery) && filterQuery.length > 0) {
+      let queryParmas = '';
       filterQuery.forEach(value => {
-        switch (value.filter_type) {
-          case FilterType.FILTER_TYPE_CITY:
-            queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_CITY, value.code);
-            break;
-          case FilterType.FILTER_TYPE_LANGUAGE:
-            queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_LANGUAGE, value.code);
-            break;
-          case FilterType.FILTER_TYPE_TOPIC:
-            queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_TOPIC, value.code);
-            break;
-          default:
-            break;
-          // case FilterType.FILTER_TYPE_DATE_RANGE:
-          //   queryParameters.params.set(ApplicationConstants.Focus_Area_)
+        if (!isNullOrUndefined(value)) {
+          switch (value.filter_type) {
+            case FilterType.FILTER_TYPE_CITY:
+              // queryParameters.params = queryParameters.params
+              //   .append('q',  ApplicationConstants.FOCUS_AREA_CITY + ':' + value.code )
+              queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_CITY + '":"' + value.code + '",');
+              // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_CITY, value.code);
+              break;
+            case FilterType.FILTER_TYPE_LANGUAGE:
+              // queryParameters.params = queryParameters.params
+              //   .append('q',  ApplicationConstants.FOCUS_AREA_LANGUAGE + ':' + value.code )
+              queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_LANGUAGE + '":"' + value.code + '",');
+              // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_LANGUAGE, value.code);
+              break;
+            case FilterType.FILTER_TYPE_TOPIC:
+              // queryParameters.params = queryParameters.params
+              //   .append('q',  ApplicationConstants.FOCUS_AREA_TOPIC + ':' + value.code )
+              queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_TOPIC + '":"' + value.code + '",');
+              // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_TOPIC, value.code);
+              break;
+            default:
+              break;
+            // case FilterType.FILTER_TYPE_DATE_RANGE:
+            //   queryParameters.params.set(ApplicationConstants.Focus_Area_)
+          }
         }
+
       });
+      // This is or case
+      queryParmas = queryParmas.length > 0 ? queryParmas.substring(0, queryParmas.length - 1) : queryParmas;
+      if (!isNullOrUndefined(query)) {
+        queryParameters.params = queryParameters.params
+          .set('q', query + ',' + queryParmas);
+      } else {
+        queryParameters.params = queryParameters.params
+          .set('q', queryParmas);
+      }
     }
-    if (queryObj != null) {
-      console.log(queryObj);
-      queryParameters.params = queryParameters.params.append('start', start.toString())
-        .append('rows', pageSize.toString())
-        .append('q', queryObj.focusArea + ':' + queryObj.key + ',' + 'entities.hashtags.text:' + queryObj.value);
+    if (!isNullOrUndefined(queryObj)) {
+      queryParameters.params = queryParameters.params
+        .append('q', '"' + queryObj.focusArea + '":"' + queryObj.key + '","' + 'entities.hashtags.text":"' + queryObj.value + '"');
     }
-    return this.httpClient.get<QueryResponse>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParameters);
+    if  (!isNullOrUndefined(query) || !isNullOrUndefined(queryObj) || !isNullOrUndefined(filterQuery)) {
+      return this.httpClient.get<QueryResponse>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParameters);
+    }
+    return new Observable<QueryResponse>();
   }
 }
