@@ -108,10 +108,11 @@ export class SearchFilterComponent implements OnInit {
       this.selectedLanguage = null;
     }
     if (value === 'date') {
-      this.clearDate = ' ';
+      this.clearDate.concat('Select a date');
+      console.log(this.clearDate);
     }
     if (value === 'all') {
-      this.clearDate = ' ';
+      this.clearDate = 'Select a date';
       this.selectedLanguage = null;
       this.selectedCity = null;
       this.selectedTopic = null;
