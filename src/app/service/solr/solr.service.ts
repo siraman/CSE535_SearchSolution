@@ -5,6 +5,9 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {SolrUrlConstants} from '../../util/url-constants';
 import {QueryResponse} from '../../model/query-result';
 import {Query} from '../../model/query';
+import {FilterInputModel} from '../../query/filters/filter-input-model';
+import {FilterType} from '../../query/filters/filter-type';
+import {ApplicationConstants} from '../../util/application-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -26,26 +29,41 @@ export class SolrService {
     return this.httpClient.get<HashtagFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, options);
   }
 
-  getSearchResults(query, pageNumber, pageSize, queryObj: Query): Observable<QueryResponse> {
+  getSearchResults(query, pageNumber, pageSize, queryObj: Query, filterQuery?: FilterInputModel[]): Observable<QueryResponse> {
     const start = (pageNumber - 1) * (pageSize);
-
+    const queryParameters = {
+      params: new HttpParams()
+    };
     if (query) {
-      const queryParams = {
-        params: new HttpParams()
-          .set('start', start.toString())
-          .set('rows', pageSize.toString())
-          .set('q', query)
-      };
-      return this.httpClient.get<QueryResponse>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParams);
-    } else {
-
-      const queryParams = {
-        params: new HttpParams()
-          .set('start', start.toString())
-          .set('rows', pageSize.toString())
-          .set('q', queryObj.focusArea + ':' + queryObj.key + ',' + 'entities.hashtags.text:' + queryObj.value)
-      };
-      return this.httpClient.get<QueryResponse>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParams);
+      queryParameters.params = queryParameters.params.append('start', start.toString())
+        .append('rows', pageSize.toString())
+        .append('q', query);
     }
+    if (filterQuery != null) {
+      filterQuery.forEach(value => {
+        switch (value.filter_type) {
+          case FilterType.FILTER_TYPE_CITY:
+            queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_CITY, value.code);
+            break;
+          case FilterType.FILTER_TYPE_LANGUAGE:
+            queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_LANGUAGE, value.code);
+            break;
+          case FilterType.FILTER_TYPE_TOPIC:
+            queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_TOPIC, value.code);
+            break;
+          default:
+            break;
+          // case FilterType.FILTER_TYPE_DATE_RANGE:
+          //   queryParameters.params.set(ApplicationConstants.Focus_Area_)
+        }
+      });
+    }
+    if (queryObj != null) {
+      console.log(queryObj);
+      queryParameters.params = queryParameters.params.append('start', start.toString())
+        .append('rows', pageSize.toString())
+        .append('q', queryObj.focusArea + ':' + queryObj.key + ',' + 'entities.hashtags.text:' + queryObj.value);
+    }
+    return this.httpClient.get<QueryResponse>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParameters);
   }
 }

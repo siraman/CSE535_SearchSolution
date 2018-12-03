@@ -2,6 +2,7 @@ export class ApplicationConstants {
   static readonly FOCUS_AREA_TOPIC = 'queryMetadata.query_topic';
   static readonly FOCUS_AREA_LANGUAGE = 'queryMetadata.query_language';
   static readonly FOCUS_AREA_CITY = 'queryMetadata.query_city';
+  static readonly FOCUS_AREA_DATERANGE = '';
 
 
   static readonly FOCUS_AREA_TOPIC_ENVIRONMENT_DISPLAY_STRING = 'Environment';
