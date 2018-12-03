@@ -5,7 +5,7 @@
       class="search-result-item-title-container search-result-item-title col-lg-12">{{tweet.text_filtered.slice(0, tweet.text_filtered.indexOf('.'))}}</div>
 
     <div class="search-result-item-link-container col-lg-12">
-      <a class="search-result-item-link" href="https://twitter.com/{{tweet['user.screen_name']}}/status/{{tweet.id}}">https://twitter.com/{{tweet['user.screen_name']}}
+      <a target="_blank" class="search-result-item-link" href="https://twitter.com/{{tweet['user.screen_name']}}/status/{{tweet.id}}">https://twitter.com/{{tweet['user.screen_name']}}
         /status/{{tweet.id}}</a>
     </div>
     <div *ngIf="tweet['entities.hashtags.text']" class="search-result-item-hashtags-container padding_0px col-lg-12">
