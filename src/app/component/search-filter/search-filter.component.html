@@ -4,7 +4,8 @@
       <h3 class="section_heading filter_container_head_title">Filters</h3>
     </div>
     <div class="filter_clear_all_container">
-      <button (click)="clearText('all')" class="btn btn-default filter_clear_button" type="button">
+      <button (click)="clearText('all')" class="btn btn-default filter_clear_button"
+              onclick="getElementById('date').value = 'Select a date'" type="button">
         Clear all
       </button>
     </div>
@@ -93,16 +94,17 @@
         <h3 class="subsection_heading filter_title">Date</h3>
       </div>
       <div class="filter_clear_container">
-        <button (click)="clearText('date')" class="btn btn-default filter_clear_button" type="button">
+        <button (click)="clearText('date')" class="btn btn-default filter_clear_button"
+                onclick="getElementById('date').value = 'Select a date'" type="button">
           Clear
         </button>
       </div>
     </div>
     <div class="filter_body">
-      <input [(ngModel)]="daterangepickerModel" [bsConfig]="bsConfig" [maxDate]="maxDate"
+      <input [(ngModel)]="daterangepickerModel" [bsConfig]="bsConfig" [maxDate]="maxDate" class="btn btn-secondary dropdown-toggle btn-block
+             filter-datepicker-height filter-button-style"
              aria-expanded="false" aria-haspopup="true" bsDaterangepicker
-             class="btn btn-secondary dropdown-toggle btn-block
-             filter-datepicker-height filter-button-style" placement="right" type="textarea" value="{{clearDate}}"
+             id='date' placement="right" type="textarea" value={{clearDate}}
       />
     </div>
   </div>
