@@ -1,6 +1,6 @@
 <div class="application_background_off_white" style="padding: 16px;">
 
-  <app-query (freeTextSearch) = "captureFreeTextSearchEvent($event)"></app-query>
+  <app-query (freeTextSearch)="captureFreeTextSearchEvent($event)"></app-query>
 
 
   <div>
@@ -11,7 +11,8 @@
       <div class="application_white_container hashtag_grid_container"
            *ngFor="let inputModel of hashtagFacetInputModelList">
 
-        <app-hashtags (triggerHashTagSearchEvent)="captureHashtagSearchEvent($event)" [hashtagFacetInputModel]="inputModel"></app-hashtags>
+        <app-hashtags (triggerHashTagSearchEvent)="captureHashtagSearchEvent($event)"
+                      [hashtagFacetInputModel]="inputModel"></app-hashtags>
       </div>
     </div>
   </div>

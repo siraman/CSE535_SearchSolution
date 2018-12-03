@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-query',
@@ -10,6 +9,7 @@ export class SearchQueryComponent implements OnInit {
 
   @Input() searchPageQuery: string;
   @Output() queryChange: EventEmitter<string> = new EventEmitter<string>();
+
   constructor() {
   }
 

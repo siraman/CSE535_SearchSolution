@@ -30,6 +30,7 @@ export class HashtagComponent implements OnInit {
         // TODO: Implement the error state.
       });
   }
+
   triggerSearch(focusArea, key, value, inNewWindow: boolean): void {
     const queryObj = new Query();
     queryObj.focusArea = focusArea;

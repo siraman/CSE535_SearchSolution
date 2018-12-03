@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HashtagFacetInputModel} from '../../query/hashtag-facet/hashtag-facet-input-model';
 import {HashtagFacetInputModelGenerator} from '../../query/hashtag-facet/hashtag-facet-input-model-generator';
 import {Query} from '../../model/query';
@@ -11,12 +11,15 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   hashtagFacetInputModelList: HashtagFacetInputModel[];
-  constructor(private router: Router) { }
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
     this.hashtagFacetInputModelList = HashtagFacetInputModelGenerator.getListOfInputModels();
 
   }
+
   captureHashtagSearchEvent(queryDetails: []) {
     // @ts-ignore
     const query: Query = queryDetails[0];

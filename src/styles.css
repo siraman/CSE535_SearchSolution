@@ -147,6 +147,6 @@ html {
   color: #808080
 }
 
-.cursor_pointer, cursor_pointer:hover{
+.cursor_pointer, cursor_pointer:hover {
   cursor: pointer;
 }

@@ -57,6 +57,11 @@ export class SearchFilterComponent implements OnInit {
         return;
       }
     });
+
+    this.filtersEventObjectList.push(new FilterInputModel(city.display, city.code, city.filter_type));
+    this.filtersEvent.emit(this.filtersEventObjectList);
+    this.selectedCity = city;
+    return;
   }
 
   selectNewLanguage(language: FilterInputModel) {
@@ -70,6 +75,10 @@ export class SearchFilterComponent implements OnInit {
         return;
       }
     });
+    this.filtersEventObjectList.push(new FilterInputModel(language.display, language.code, language.filter_type));
+    this.filtersEvent.emit(this.filtersEventObjectList);
+    this.selectedLanguage = language;
+    return;
   }
 
   selectNewTopic(topic: FilterInputModel) {
@@ -83,5 +92,9 @@ export class SearchFilterComponent implements OnInit {
         return;
       }
     });
+    this.filtersEventObjectList.push(new FilterInputModel(topic.display, topic.code, topic.filter_type));
+    this.filtersEvent.emit(this.filtersEventObjectList);
+    this.selectedTopic = topic;
+    return;
   }
 }
