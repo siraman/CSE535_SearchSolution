@@ -89,6 +89,24 @@ export class FilterInputModelGenerator {
           display: ApplicationConstants.FOCUS_AREA_CITY_MEXICO_CITY_DISPLAY_STRING
         }
       ];
+    } else if (filterType === FilterType.FILTER_TYPE_SORT) {
+      return [
+        {
+          filter_type: FilterType.FILTER_TYPE_SORT,
+          code: ApplicationConstants.FOCUS_AREA_DATERANGE,
+          display: ApplicationConstants.SORT_BY_CREATED_AT_DISPLAY_STRING
+        },
+        {
+          filter_type: FilterType.FILTER_TYPE_SORT,
+          code: ApplicationConstants.FAVORITE_COUNT,
+          display: ApplicationConstants.SORT_BY_FAVORITE_COUNT_DISPLAY_STRING
+        },
+        {
+          filter_type: FilterType.FILTER_TYPE_SORT,
+          code: ApplicationConstants.RE_TWEET_COUNT,
+          display: ApplicationConstants.SORT_BY_RE_TWEETED_COUNT_DISPLAY_STRING
+        }
+      ];
     }
   }
 }
