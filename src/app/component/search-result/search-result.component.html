@@ -1,8 +1,8 @@
 <div class="search_container">
 
-  <div *ngIf="searched" class="result_summary col-lg-12"> {{totalTweets}} results found for "{{query}}"</div>
+  <div *ngIf="searched" class="result_summary col-lg-12"> {{totalTweets}} results found <span *ngIf="query">for "{{query}}"</span></div>
 
-  <div *ngIf="totalTweets > 0" class="col-lg-12" style="padding-left: 0; padding-right: 0">
+  <div *ngIf="totalTweets > 0" class="col-lg-12" style="margin-top: 32px; padding-left: 0; padding-right: 0">
     <div
       *ngFor="let result of results | paginate: { id: 'server', itemsPerPage: 10, currentPage: currentPage, totalItems: totalTweets}">
       <app-search-result-item [tweet]=result></app-search-result-item>

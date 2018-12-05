@@ -2,7 +2,9 @@ export class ApplicationConstants {
   static readonly FOCUS_AREA_TOPIC = 'queryMetadata.query_topic';
   static readonly FOCUS_AREA_LANGUAGE = 'queryMetadata.query_language';
   static readonly FOCUS_AREA_CITY = 'queryMetadata.query_city';
-  static readonly FOCUS_AREA_DATERANGE = '';
+  static readonly FOCUS_AREA_DATERANGE = 'created_at';
+  static readonly RE_TWEET_COUNT = 'retweet_count';
+  static readonly FAVORITE_COUNT = 'favorite_count';
 
 
   static readonly FOCUS_AREA_TOPIC_ENVIRONMENT_DISPLAY_STRING = 'Environment';
@@ -34,5 +36,9 @@ export class ApplicationConstants {
   static readonly FOCUS_AREA_CITY_PARIS_DISPLAY_STRING = 'Paris';
   static readonly FOCUS_AREA_CITY_BANGKOK_DISPLAY_STRING = 'Bangkok';
   static readonly FOCUS_AREA_CITY_MEXICO_CITY_DISPLAY_STRING = 'Mexico City';
+
+  static readonly SORT_BY_CREATED_AT_DISPLAY_STRING = 'Created at';
+  static readonly SORT_BY_RE_TWEETED_COUNT_DISPLAY_STRING = 'Re-tweeted Count';
+  static readonly SORT_BY_FAVORITE_COUNT_DISPLAY_STRING = 'Favorite Count';
 
 }
