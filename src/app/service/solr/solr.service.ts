@@ -41,44 +41,52 @@ export class SolrService {
         .append('q', query);
     }
     if (!isNullOrUndefined(filterQuery) && filterQuery.length > 0) {
-      let queryParmas = '';
+      // let queryParmas = '';
       filterQuery.forEach(value => {
         if (!isNullOrUndefined(value)) {
           switch (value.filter_type) {
             case FilterType.FILTER_TYPE_CITY:
-              // queryParameters.params = queryParameters.params
-              //   .append('q',  ApplicationConstants.FOCUS_AREA_CITY + ':' + value.code )
-              queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_CITY + '":"' + value.code + '",');
+              queryParameters.params = queryParameters.params
+                .append('fq',  ApplicationConstants.FOCUS_AREA_CITY + ':' + value.code );
+              // queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_CITY + '":"' + value.code + '",');
               // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_CITY, value.code);
               break;
             case FilterType.FILTER_TYPE_LANGUAGE:
-              // queryParameters.params = queryParameters.params
-              //   .append('q',  ApplicationConstants.FOCUS_AREA_LANGUAGE + ':' + value.code )
-              queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_LANGUAGE + '":"' + value.code + '",');
+              queryParameters.params = queryParameters.params
+                .append('fq',  ApplicationConstants.FOCUS_AREA_LANGUAGE + ':' + value.code );
+              // queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_LANGUAGE + '":"' + value.code + '",');
               // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_LANGUAGE, value.code);
               break;
             case FilterType.FILTER_TYPE_TOPIC:
-              // queryParameters.params = queryParameters.params
-              //   .append('q',  ApplicationConstants.FOCUS_AREA_TOPIC + ':' + value.code )
-              queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_TOPIC + '":"' + value.code + '",');
+              queryParameters.params = queryParameters.params
+                .append('fq',  ApplicationConstants.FOCUS_AREA_TOPIC + ':' + value.code );
+              // queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_TOPIC + '":"' + value.code + '",');
               // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_TOPIC, value.code);
+              break;
+            case FilterType.FILTER_TYPE_DATE_RANGE:
+              queryParameters.params = queryParameters.params
+                .append('fq',  ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code );
+              // queryParmas = queryParmas.concat(ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code + ',');
+              break;
+            case FilterType.FILTER_TYPE_SORT:
+              queryParameters.params = queryParameters.params
+                .append('sort',  value.code + ' desc');
+              // queryParmas = queryParmas.concat(ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code + ',');
               break;
             default:
               break;
-            // case FilterType.FILTER_TYPE_DATE_RANGE:
-            //   queryParameters.params.set(ApplicationConstants.Focus_Area_)
           }
         }
 
       });
       // This is or case
-      queryParmas = queryParmas.length > 0 ? queryParmas.substring(0, queryParmas.length - 1) : queryParmas;
+      // queryParmas = queryParmas.length > 0 ? queryParmas.substring(0, queryParmas.length - 1) : queryParmas;
       if (!isNullOrUndefined(query)) {
         queryParameters.params = queryParameters.params
-          .set('q', query + ',' + queryParmas);
+          .set('q', query);
       } else {
         queryParameters.params = queryParameters.params
-          .set('q', queryParmas);
+          .set('q', '*:*');
       }
     }
     if (!isNullOrUndefined(queryObj)) {
