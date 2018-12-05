@@ -1,0 +1,29 @@
+<div class="application_background_off_white" style="padding: 16px;">
+  <div class="navigation">
+    <a routerLink="/home"> Hide Time Analysis</a>
+  </div>
+  <div>
+    <div id="1WeekCityChart" class="chartL">
+      <p-chart type="bar" [data]="w_1"></p-chart>
+    </div>
+    <div id="1WeekTopicChart" class="chartR">
+      <p-chart type="bar" [data]="tw_1"></p-chart>
+    </div>
+  </div>
+   <div style="padding-top: 8%" >
+      <div id="1MonthCityChart" class="chartL">
+        <p-chart type="bar" [data]="w_1"></p-chart>
+      </div>
+     <div id="1MonthTopicChart" class="chartR">
+       <p-chart type="bar" [data]="tm_1"></p-chart>
+     </div>
+   </div>
+  <div style="padding-top: 8%">
+    <div id="1YCityChart" class="chartL">
+      <p-chart type="bar" [data]="m_6"></p-chart>
+    </div>
+    <div id="1YTopicChart" class="chartR">
+      <p-chart type="bar" [data]="tm_6"></p-chart>
+    </div>
+  </div>
+</div>

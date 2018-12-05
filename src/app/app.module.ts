@@ -17,7 +17,8 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {SearchResultItemComponent} from './component/search-result-item/search-result-item.component';
 import {TweetDisplayComponent} from './component/tweet-display/tweet-display.component';
 import {SearchAnalysisComponent} from './component/search-analysis/search-analysis.component';
-
+import { SearchAnalyticsComponent } from './search-analytics/search-analytics.component';
+import { ChartModule} from 'primeng/chart';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import {SearchAnalysisComponent} from './component/search-analysis/search-analys
     SearchResultItemComponent,
     TweetDisplayComponent,
     SearchAnalysisComponent,
+    SearchAnalyticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import {SearchAnalysisComponent} from './component/search-analysis/search-analys
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
