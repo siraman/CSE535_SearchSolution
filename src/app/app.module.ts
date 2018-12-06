@@ -17,6 +17,11 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {SearchResultItemComponent} from './component/search-result-item/search-result-item.component';
 import {TweetDisplayComponent} from './component/tweet-display/tweet-display.component';
 import {SearchAnalysisComponent} from './component/search-analysis/search-analysis.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {GoogleChart} from './angular2-google-chart.directive';
+import {ChartComponent} from './component/chart/chart.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +37,8 @@ import {SearchAnalysisComponent} from './component/search-analysis/search-analys
     SearchResultItemComponent,
     TweetDisplayComponent,
     SearchAnalysisComponent,
+    GoogleChart,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +46,14 @@ import {SearchAnalysisComponent} from './component/search-analysis/search-analys
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [TweetDisplayComponent,
+    ]
 })
 export class AppModule {
 }

@@ -17,9 +17,12 @@ export interface Tweet {
   truncated: boolean;
   'entities.hashtags.text': string;
   'entities.urls.display_url': string;
-  text_filtered: string;
-  'user.id': number;
+  'user.profile_image_url': string;
+  'user.name': string;
   'user.screen_name': string;
+  'queryMetadata.query_city': string;
+  'queryMetadata.query_topic': string;
+  'queryMetadata.query_language': string;
   entities: TweetEntities;
   source: string;
   in_reply_to_status_id: number | null;
@@ -27,7 +30,7 @@ export interface Tweet {
   in_reply_to_user_id: number | null;
   in_reply_to_user_id_str: null | string;
   in_reply_to_screen_name: null | string;
-  user: User;
+  // user: User;
   geo: null;
   coordinates: null;
   place: null;

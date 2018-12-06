@@ -8,10 +8,9 @@
   </div>
 
   <div class="col-lg-9 col-md-10 col-sm-8 col-12" style="padding-left: 50px; padding-right: 50px;">
-    <app-search-result [query]=query></app-search-result>
+    <app-search-result [query]=query (facetInputEventEmitter)="captureFacetInputEvent($event)"></app-search-result>
   </div>
-
   <div class="col-lg-3 col-md-1 col-sm-12 col-12 padding-left-right-zero" style="height: 100%;">
-    <app-search-analysis></app-search-analysis>
+      <app-search-analysis [facetInput]=facetInput></app-search-analysis>
   </div>
 </div>

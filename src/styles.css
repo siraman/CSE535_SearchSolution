@@ -150,3 +150,6 @@ html {
 .cursor_pointer, cursor_pointer:hover {
   cursor: pointer;
 }
+.width-50-per{
+  width:50%
+}
