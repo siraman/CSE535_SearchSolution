@@ -3,6 +3,7 @@
   font-size: 3rem;
   color: #3d4465;
   font-weight: 500;
+  line-height: 1.8;
   margin-top: 100px;
   margin-bottom: 20px;
 }
@@ -18,4 +19,9 @@
 .hashtag_grid_container {
   border-radius: 4px;
   min-height: 250px;
+}
+
+.navigation {
+  right: 0px;
+  padding-left: 85%;
 }

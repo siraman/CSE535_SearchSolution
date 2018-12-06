@@ -1,0 +1,22 @@
+
+.navigation {
+  right: 0px;
+  padding-left: 85%;
+}
+
+.chartL{
+  height: 60%;
+  width: 30%;
+  float: left;
+}
+.chartR{
+  height: 60%;
+  width: 30%;
+  margin-left: 40%;
+}
+
+.chartC{
+  height: 80%;
+  width: 30%;
+  margin-left: 20%;
+}

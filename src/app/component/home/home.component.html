@@ -1,8 +1,9 @@
 <div class="application_background_off_white" style="padding: 16px;">
+  <div class="navigation" style="visibility: hidden">
+    <a routerLink="/analysis"> Show Time Analysis</a>
+  </div>
 
   <app-query (freeTextSearch)="captureFreeTextSearchEvent($event)"></app-query>
-
-
   <div>
     <div class="trending_hashtags_title_container">
       <span>Trending hashtags</span>
