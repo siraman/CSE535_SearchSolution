@@ -150,3 +150,6 @@ html {
 .cursor_pointer, cursor_pointer:hover {
   cursor: pointer;
 }
+ul.ngx-pagination{
+  margin:20px;
+}
