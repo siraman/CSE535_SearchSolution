@@ -55,8 +55,8 @@
 
 .search-result-item-hashtags-container {
   padding: 4px 40px 4px 40px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  /*flex-wrap: wrap;*/
+  /*justify-content: flex-start;*/
 }
 
 .search-result-item-date-container {
@@ -78,11 +78,13 @@
   cursor: pointer;
   border-radius: 4px;
   padding: 4px 4px;
-  margin: 5px;
+  margin: 0px 5px 5px 5px;
   background-color: var(--accent-color-light);
   color: var(--accent-color-dark);
   font-weight: 600;
   line-height: 1.5;
+  flex-shrink: 0;
+  flex: 0 0 auto;
 }
 
 .hashtag:hover {

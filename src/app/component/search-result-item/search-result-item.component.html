@@ -2,7 +2,7 @@
 
   <div class="col-lg-9 padding_0_px">
     <div
-      class="search-result-item-title-container search-result-item-title col-lg-12">{{tweet.text_filtered.slice(0, tweet.text_filtered.indexOf('.'))}}</div>
+      class="search-result-item-title-container search-result-item-title col-lg-12">{{tweet.text_filtered}}</div>
 
     <div class="search-result-item-link-container col-lg-12">
       <a target="_blank" class="search-result-item-link" href="https://twitter.com/{{tweet['user.screen_name']}}/status/{{tweet.id}}">https://twitter.com/{{tweet['user.screen_name']}}
@@ -53,7 +53,7 @@
 
   <div class="col-lg-3  padding_0_px" style="display: flex; float: right;">
 
-    <button class="btn search-result-analysis_button">Analyse tweet</button>
+    <button (click)="onItemClick()" class="btn search-result-analysis_button">Analyse tweet</button>
   </div>
 
 
