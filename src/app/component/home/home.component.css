@@ -8,6 +8,16 @@
   margin-bottom: 20px;
 }
 
+.show_time_analysis {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arvo, Roboto, Helvetica, sans-serif;
+font-size: 1.5rem !important;
+  color: var(--text-color-primary-normal);
+  font-weight: 500 !important;
+  line-height: 1.8;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
 .hashtag_grid {
   padding: 16px 0;
   display: grid;
@@ -24,4 +34,17 @@
 .navigation {
   right: 0px;
   padding-left: 85%;
+}
+
+
+.search-result-analysis_button {
+  vertical-align: middle;
+  text-align: right;
+  float: right;
+  background: var(--accent-color-dark);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arvo, Roboto, Helvetica, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--background-color-white);
+  margin: auto;
 }
