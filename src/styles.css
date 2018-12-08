@@ -76,6 +76,17 @@ html {
   background: var(--background-color-white);
 }
 
+.search-engine-name {
+  padding-top: 80px;
+  font-family: Arvo, Roboto, Helvetica, sans-serif;
+  color: var(--text-color-primary-normal);
+  font-size: 7rem;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 80px;
+
+}
+
 .section_heading {
   font-family: Arvo, Roboto, Helvetica, sans-serif;
   color: var(--text-color-primary-dark);
@@ -152,4 +163,8 @@ html {
 }
 ul.ngx-pagination{
   margin:20px;
+}
+
+.width-50-per {
+  width: 50%
 }

@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tweet} from '../../model/query-result';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {TweetDisplayComponent} from '../tweet-display/tweet-display.component';
 
 @Component({
   selector: 'app-search-result-item',
@@ -10,10 +12,16 @@ export class SearchResultItemComponent implements OnInit {
 
   @Input() tweet: Tweet;
 
-  onItemClick() {
+  constructor(public dialog: MatDialog) {
   }
 
-  constructor() { }
+  onItemClick() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.width = '60%';
+    dialogConfig.data = {tweet: this.tweet};
+    this.dialog.open(TweetDisplayComponent, dialogConfig);
+  }
 
   ngOnInit() {
   }

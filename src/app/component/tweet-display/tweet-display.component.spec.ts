@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TweetDisplayComponent } from './tweet-display.component';
+import {TweetDisplayComponent} from './tweet-display.component';
 
 describe('TweetDisplayComponent', () => {
   let component: TweetDisplayComponent;
@@ -10,7 +10,7 @@ describe('TweetDisplayComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ TweetDisplayComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
