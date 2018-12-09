@@ -37,11 +37,60 @@ export class SolrService {
     return this.httpClient.get<HashtagFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, options);
   }
 
-  getFacetCounts(query, value, filterQuery?: FilterInputModel[]): Observable<ArbitFacet> {
+  getFacetCounts(query, filterQuery?: FilterInputModel[]): Observable<ArbitFacet> {
     const options = {
       params: new HttpParams().set('facet.field', 'queryMetadata.query_topic').append('facet.field', 'queryMetadata.query_city').append('facet.field', 'queryMetadata.query_language').set('facet', 'on')
-        .set('q', query).set('rows', '0').set('wt', 'json')
+        .set('q', query).set('rows', '0').set('wt', 'json').set('json.nl', 'arrntv')
     };
+    if (!isNullOrUndefined(filterQuery) && filterQuery.length > 0) {
+      // let queryParmas = '';
+      filterQuery.forEach(value => {
+        if (!isNullOrUndefined(value)) {
+          switch (value.filter_type) {
+            case FilterType.FILTER_TYPE_CITY:
+              options.params = options.params
+                .append('fq', ApplicationConstants.FOCUS_AREA_CITY + ':' + value.code);
+              // queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_CITY + '":"' + value.code + '",');
+              // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_CITY, value.code);
+              break;
+            case FilterType.FILTER_TYPE_LANGUAGE:
+              options.params = options.params
+                .append('fq', ApplicationConstants.FOCUS_AREA_LANGUAGE + ':' + value.code);
+              // queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_LANGUAGE + '":"' + value.code + '",');
+              // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_LANGUAGE, value.code);
+              break;
+            case FilterType.FILTER_TYPE_TOPIC:
+              options.params = options.params
+                .append('fq', ApplicationConstants.FOCUS_AREA_TOPIC + ':' + value.code);
+              // queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_TOPIC + '":"' + value.code + '",');
+              // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_TOPIC, value.code);
+              break;
+            case FilterType.FILTER_TYPE_DATE_RANGE:
+              options.params = options.params
+                .append('fq', ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code);
+              // queryParmas = queryParmas.concat(ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code + ',');
+              break;
+            case FilterType.FILTER_TYPE_SORT:
+              options.params = options.params
+                .append('sort', value.code + ' desc');
+              // queryParmas = queryParmas.concat(ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code + ',');
+              break;
+            default:
+              break;
+          }
+        }
+
+      });
+      // This is or case
+      // queryParmas = queryParmas.length > 0 ? queryParmas.substring(0, queryParmas.length - 1) : queryParmas;
+      if (!isNullOrUndefined(query)) {
+        options.params = options.params
+          .set('q', query);
+      } else {
+        options.params = options.params
+          .set('q', '*:*');
+      }
+    }
     return this.httpClient.get<ArbitFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, options);
   }
 

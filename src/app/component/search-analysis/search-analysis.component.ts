@@ -12,9 +12,8 @@ import {SolrService} from '../../service/solr/solr.service';
 })
 
 export class SearchAnalysisComponent implements OnInit, OnChanges {
-  @Input() public results: ArbitFacetFields[];
+  @Input() public results: Array<Array<Array<string | number>>>;
   @Output() searchAnalysisEvent: EventEmitter<Boolean> = new EventEmitter<Boolean>();
-  arbitFacetFields: ArbitFacetFields;
 
   constructor(private solrService: SolrService) {
     console.log('inside search analysis');
