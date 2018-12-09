@@ -7,6 +7,7 @@ import {Query} from '../../model/query';
 import {FilterInputModel} from '../../query/filters/filter-input-model';
 import {ArbitFacet, ArbitFacetFields} from '../../model/arbit_facet';
 import {FacetInput} from '../../query/facets/facet-input';
+import {ApplicationConstants} from '../../util/application-constants';
 
 @Component({
   selector: 'app-search-result',
@@ -18,18 +19,18 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
   @Input() filterQuery: FilterInputModel[];
   hashTagQueryObject: Query;
   results: Tweet[];
-  facetResultFields: ArbitFacetFields[];
+  facetResultFields: Array<Array<Array<string | number>>>;
   pageSize = 10;
   totalTweets = 0;
   currentPage = 1;
   searched = false;
-  @Output() facetInputEventEmitter: EventEmitter<ArbitFacetFields[]> = new EventEmitter<ArbitFacetFields[]>();
+  @Output() facetInputEventEmitter: EventEmitter<Array<Array<Array<string | number>>>> = new EventEmitter<Array<Array<Array<string | number>>>>();
 
   constructor(private searchResults: SolrService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private locationService: Location) {
-    this.facetResultFields = new Array<ArbitFacetFields>();
+    this.facetResultFields = new Array<Array<Array<string | number>>>();
   }
 
   getTweets(query, pageNumber, pageSize, queryObj?: Query, filterQuery?: FilterInputModel[]) {
@@ -42,16 +43,59 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
       }
     });
     const facetQuery = this.query;
-    this.searchResults.getFacetCounts(facetQuery, 'queryMetadata.query_city')
-      .subscribe(facetResults => this.facetResultFields[0] = facetResults.facet_counts.facet_fields, error1 => {
+
+    this.facetResultFields = new Array<Array<Array<string | number>>>();
+    this.searchResults.getFacetCounts(facetQuery, filterQuery)
+      .subscribe(facetResults => {
+
+          let topic_new_data_array = new Array<Array<string | number>>();
+          facetResults.facet_counts.facet_fields['queryMetadata.query_topic'].forEach(value => {
+
+            if (value.name !== 'unrest') {
+              let new_data = new Array<string | number>();
+              new_data.push(ApplicationConstants.getFormattedTopicName(value.name));
+              new_data.push(value.value);
+              topic_new_data_array.push(new_data);
+            }
+          });
+
+          let city_new_data_array = new Array<Array<string | number>>();
+          facetResults.facet_counts.facet_fields['queryMetadata.query_city'].forEach(value => {
+
+            if (value.name !== 'city') {
+              let new_data = new Array<string | number>();
+              new_data.push(ApplicationConstants.getFormattedCityName(value.name));
+              new_data.push(value.value);
+              city_new_data_array.push(new_data);
+            }
+          });
+
+          let lanugage_new_data_array = new Array<Array<string | number>>();
+          facetResults.facet_counts.facet_fields['queryMetadata.query_language'].forEach(value => {
+
+
+            let new_data = new Array<string | number>();
+            new_data.push(ApplicationConstants.getFormattedLanguageName(value.name));
+            new_data.push(value.value);
+            lanugage_new_data_array.push(new_data);
+
+          });
+
+          this.facetResultFields.push(topic_new_data_array);
+          this.facetResultFields.push(city_new_data_array);
+          this.facetResultFields.push(lanugage_new_data_array);
+
+
+
+        }, error1 => {
     });
-    this.searchResults.getFacetCounts('queryMetadata.query_city:nyc', 'queryMetadata.query_topic')
-      .subscribe(facetResults => this.facetResultFields[1] = facetResults.facet_counts.facet_fields, error1 => {
-    });
-    const facetQuery_2 = 'queryMetadata.query_city:delhi';
-    this.searchResults.getFacetCounts(facetQuery_2, 'queryMetadata.query_topic')
-      .subscribe(facetResults => this.facetResultFields[2] = facetResults.facet_counts.facet_fields, error1 => {
-    });
+    // this.searchResults.getFacetCounts(facetQuery, 'queryMetadata.query_topic', filterQuery)
+    //   .subscribe(facetResults => this.facetResultFields[1] = facetResults.facet_counts.facet_fields, error1 => {
+    // });
+    // const facetQuery_2 = 'queryMetadata.query_city:delhi';
+    // this.searchResults.getFacetCounts(facetQuery, 'queryMetadata.query_topic', filterQuery)
+    //   .subscribe(facetResults => this.facetResultFields[2] = facetResults.facet_counts.facet_fields, error1 => {
+    // });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -85,6 +129,8 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
   }
 
   sendMessage() {
+    console.log('in search results')
+    console.log(this.facetResultFields)
     this.facetInputEventEmitter.emit(this.facetResultFields);
   }
 
@@ -93,13 +139,11 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
   // }
 
   ngOnInit() {
-    console.log('came to on init')
     const freeTextSearchQuery = this.activatedRoute.snapshot.queryParams['query'];
     const topic = this.activatedRoute.snapshot.queryParams['topic'];
     const hashTag = this.activatedRoute.snapshot.queryParams['hashtag'];
     const focusArea = this.activatedRoute.snapshot.queryParams['focusArea'];
     this.locationService.replaceState('/search');
-    console.log(freeTextSearchQuery)
     if (freeTextSearchQuery) {
       this.query = freeTextSearchQuery;
       this.getTweets(freeTextSearchQuery, 1, this.pageSize);
