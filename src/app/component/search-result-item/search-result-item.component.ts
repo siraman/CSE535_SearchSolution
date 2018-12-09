@@ -10,7 +10,7 @@ import {TweetDisplayComponent} from '../tweet-display/tweet-display.component';
 })
 export class SearchResultItemComponent implements OnInit {
 
-  @Input() tweet: Tweet;
+  @Input() public tweet: Tweet;
 
   constructor(public dialog: MatDialog) {
   }
@@ -22,6 +22,7 @@ export class SearchResultItemComponent implements OnInit {
     dialogConfig.data = {tweet: this.tweet};
     this.dialog.open(TweetDisplayComponent, dialogConfig);
   }
+
 
   ngOnInit() {
   }

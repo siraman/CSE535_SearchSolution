@@ -9,6 +9,10 @@ import {FilterInputModel} from '../../query/filters/filter-input-model';
 import {FilterType} from '../../query/filters/filter-type';
 import {ApplicationConstants} from '../../util/application-constants';
 import {isNullOrUndefined} from 'util';
+import {ArbitFacet} from '../../model/arbit_facet';
+import {EnumValue} from '@angular/compiler-cli/src/ngtsc/metadata';
+import {QueryUtil} from '../../util/query-util';
+import {SearchInputModel} from '../../query/search/search-input-model';
 import {HashtagFacetChart} from '../../model/hashtag-facet-chart';
 import {ChartInputModel} from '../../query/charts/chart-input-model';
 import {DateFacetTopicChart} from '../../model/date-facet-topic-chart';
@@ -32,6 +36,23 @@ export class SolrService {
 
     return this.httpClient.get<HashtagFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, options);
   }
+
+  getFacetCounts(query, value, filterQuery?: FilterInputModel[]): Observable<ArbitFacet> {
+    const options = {
+      params: new HttpParams().set('facet.field', value).set('facet.field', value).set('facet.field', value).set('facet', 'on')
+        .set('q', query).set('rows', '0').set('wt', 'json')
+    };
+    return this.httpClient.get<ArbitFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, options);
+  }
+
+  // getFacetCountsForQueryResult(query, queryObj: Query, filterQuery?: FilterInputModel[]): Observable<ArbitFacet> {
+    // let queryParameters = QueryUtil.getQueryParamsForSearch(query, queryObj, null, null, filterQuery);
+    // const queryParams1 = queryParameters.params.set('facet.field', 'queryMetadata_query_city')
+    //   .append('facet.field', 'queryMetadata_query_topic')
+    //   .append('facet.field', 'queryMetadata_query_language').set('facet', 'on').set('rows', '0').set('wt', 'json')
+    //   .set('json.nl', 'map');
+    // return this.httpClient.get<ArbitFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParameters);
+  // }
 
   getSearchResults(query, pageNumber, pageSize, queryObj: Query, filterQuery?: FilterInputModel[]): Observable<QueryResponse> {
     const start = (pageNumber - 1) * (pageSize);

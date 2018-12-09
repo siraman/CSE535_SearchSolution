@@ -19,8 +19,11 @@ import {TweetDisplayComponent} from './component/tweet-display/tweet-display.com
 import {SearchAnalysisComponent} from './component/search-analysis/search-analysis.component';
 import {SearchAnalyticsComponent} from './search-analytics/search-analytics.component';
 import {ChartModule} from 'primeng/chart';
-import {MatDialogModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {GoogleChart} from './angular2-google-chart.directive';
+import {ChartComponent} from './component/chart/chart.component';
+
 import {GoogleChartsModule} from 'angular-google-charts';
 import { HashtagChartComponent } from './component/hashtag-chart/hashtag-chart.component';
 import { TweetChartComponent } from './component/tweet-chart/tweet-chart.component';
@@ -40,6 +43,8 @@ import { CountChartComponent } from './component/count-chart/count-chart.compone
     SearchResultItemComponent,
     TweetDisplayComponent,
     SearchAnalysisComponent,
+    GoogleChart,
+    ChartComponent,
     SearchAnalyticsComponent,
     HashtagChartComponent,
     TweetChartComponent,
