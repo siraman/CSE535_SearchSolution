@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit {
 
   query: string;
   filterQuery: FilterInputModel[];
-  facetInput: FacetInput;
+  facetInput: ArbitFacetFields[];
 
   captureQueryChangeEvent(event) {
     this.query = event;

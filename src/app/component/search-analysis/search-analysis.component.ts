@@ -11,7 +11,7 @@ import {SolrService} from '../../service/solr/solr.service';
   styleUrls: ['./search-analysis.component.css']
 })
 export class SearchAnalysisComponent implements OnInit, OnChanges {
-  @Input() public facetInput: FacetInput;
+  @Input() public results: ArbitFacetFields[];
 
   arbitFacetFields: ArbitFacetFields;
 
@@ -25,19 +25,20 @@ export class SearchAnalysisComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.hasOwnProperty('facetInput')) {
-      this.facetInput = changes['facetInput'].currentValue;
-      if (this.facetInput != null) {
-        this.solrService.getFacetCountsForQueryResult(this.facetInput.query, this.facetInput.queryObj, this.facetInput.filterQuery)
-          .subscribe(arbitFacet => {
-            if (arbitFacet.response != null) {
-              this.arbitFacetFields = arbitFacet.facet_counts.facet_fields;
-              console.log(this.arbitFacetFields);
-            }
-          }, error1 => {
-            // TODO: Handle error case.
-          });
-      }
-    }
+    console.log('analysis kiran');
+    // if (changes.hasOwnProperty('facetInput')) {
+    //   this.facetInput = changes['facetInput'].currentValue;
+    //   if (this.facetInput != null) {
+    //     this.solrService.getFacetCountsForQueryResult(this.facetInput.query, this.facetInput.queryObj, this.facetInput.filterQuery)
+    //       .subscribe(arbitFacet => {
+    //         if (arbitFacet.response != null) {
+    //           this.arbitFacetFields = arbitFacet.facet_counts.facet_fields;
+    //           console.log(this.arbitFacetFields);
+    //         }
+    //       }, error1 => {
+    //         // TODO: Handle error case.
+    //       });
+    //   }
+    // }
   }
 }

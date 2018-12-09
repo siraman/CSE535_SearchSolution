@@ -18,19 +18,20 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
   @Input() filterQuery: FilterInputModel[];
   hashTagQueryObject: Query;
   results: Tweet[];
-  facetResultFields: ArbitFacetFields;
+  facetResultFields: ArbitFacetFields[];
   temporary: ArbitFacetFields;
   arbitFacet: ArbitFacet;
   pageSize = 10;
   totalTweets = 0;
   currentPage = 1;
   searched = false;
-  @Output() facetInputEventEmitter: EventEmitter<FacetInput> = new EventEmitter<FacetInput>();
+  @Output() facetInputEventEmitter: EventEmitter<ArbitFacetFields[]> = new EventEmitter<ArbitFacetFields[]>();
 
   constructor(private searchResults: SolrService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private locationService: Location) {
+    this.facetResultFields = new Array<ArbitFacetFields>();
   }
 
   getTweets(query, pageNumber, pageSize, queryObj?: Query, filterQuery?: FilterInputModel[]) {
@@ -48,17 +49,21 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
       }
     });
     const facetQuery = this.query;
-    // this.searchResults.getFacetCounts(facetQuery, 'queryMetadata.query_city').subscribe(facetResults => this.facetResultFields = facetResults.facet_counts.facet_fields, error1 => {
-    //   // TODO: Implement the error state.
-    // });
-    // console.log('facet fields');
-    // console.log(this.facetResultFields);
-    // const facetQuery_2 = 'queryMetadata.query_city:nyc';
-    // this.searchResults.getFacetCounts(facetQuery_2, 'queryMetadata.query_topic').subscribe(facetResults => this.facetResultFields = facetResults.facet_counts.facet_fields, error1 => {
-    //   // TODO: Implement the error state.
-    // });
+    this.searchResults.getFacetCounts(facetQuery, 'queryMetadata.query_city').subscribe(facetResults => this.facetResultFields[0] = facetResults.facet_counts.facet_fields, error1 => {
+      // TODO: Implement the error state.
+    });
+    console.log('facet fields');
+    console.log(this.facetResultFields);
+    const facetQuery_2 = 'queryMetadata.query_city:nyc';
+    this.searchResults.getFacetCounts(facetQuery_2, 'queryMetadata.query_topic').subscribe(facetResults => this.facetResultFields[1] = facetResults.facet_counts.facet_fields, error1 => {
+      // TODO: Implement the error state.
+    });
     console.log('facet fields 2');
     console.log(this.facetResultFields);
+    const facetQuery_2 = 'queryMetadata.query_city:delhi';
+    this.searchResults.getFacetCounts(facetQuery_2, 'queryMetadata.query_topic').subscribe(facetResults => this.facetResultFields[2] = facetResults.facet_counts.facet_fields, error1 => {
+      // TODO: Implement the error state.
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -92,12 +97,12 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
   }
 
   sendMessage() {
-    // this.facetInputEventEmitter.emit(this.facetResultFields);
+    this.facetInputEventEmitter.emit(this.facetResultFields);
   }
 
-  analyseResultSet() {
-    this.facetInputEventEmitter.emit(new FacetInput(this.query, this.hashTagQueryObject, this.filterQuery));
-  }
+  // analyseResultSet() {
+  //   this.facetInputEventEmitter.emit(new FacetInput(this.query, this.hashTagQueryObject, this.filterQuery));
+  // }
 
   ngOnInit() {
     const freeTextSearchQuery = this.activatedRoute.snapshot.queryParams['query'];
