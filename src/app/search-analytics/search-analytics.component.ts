@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartModule} from 'primeng/chart';
+import {Component, OnInit} from '@angular/core';
+import {ChartModule} from 'primeng/chart';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {SolrService} from '../service/solr/solr.service';
+import {HashtagFacetInputModel} from '../query/hashtag-facet/hashtag-facet-input-model';
+import {HashtagFacetInputModelGenerator} from '../query/hashtag-facet/hashtag-facet-input-model-generator';
+import {ChartInputModel} from '../query/charts/chart-input-model';
+import {ChartInputModelGenerator} from '../query/charts/chart-input-model-generator';
+import {HashtagChartFacetInputModelGenerator} from '../query/hashtag-facet/hashtag-chart-facet-model-generator';
+
 declare var require: any;
 // const language = require('@google-cloud/language');
 // const client = new language.LanguageServiceClient();
@@ -12,6 +19,10 @@ declare var require: any;
   styleUrls: ['./search-analytics.component.css']
 })
 export class SearchAnalyticsComponent implements OnInit {
+
+  hashtagFacetInputModelList: HashtagFacetInputModel[];
+
+  chartInputModelList: ChartInputModel[];
   w_1: any;
   m_1: any;
   m_6: any;
@@ -21,9 +32,30 @@ export class SearchAnalyticsComponent implements OnInit {
   tm_6: any;
   ht: any;
 
-  constructor(private http: HttpClient ) {
+  myData = [
+    ['London', 8136000],
+    ['New York', 8538000],
+    ['Paris', 2244000],
+    ['Berlin', 3470000],
+    ['Kairo', 19500000],
+  ];
+
+  myColumnNames = [
+    'test', 'test', 'test', 'test', 'tes',
+  ];
+
+  myOptions = {
+    animation: {
+      duration: 1000,
+      easing: 'out',
+    },
+    colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+    is3D: true
+  };
+
+  constructor(private http: HttpClient) {
     this.w_1 = {
-      labels: ['New York City', 'Delhi', 'Paris', 'Bangkok', 'Mexico City' ],
+      labels: ['New York City', 'Delhi', 'Paris', 'Bangkok', 'Mexico City'],
       datasets: [
         {
           label: 'Tweet Share for Last 100 Days',
@@ -54,7 +86,7 @@ export class SearchAnalyticsComponent implements OnInit {
     };
 
     this.tm_6 = {
-      labels: ['Environment', 'Politics', 'Infrastructure', 'Crime', 'Social Unrest' ],
+      labels: ['Environment', 'Politics', 'Infrastructure', 'Crime', 'Social Unrest'],
       datasets: [
         {
           label: 'Tweet Share for Last 12 Months',
@@ -64,7 +96,7 @@ export class SearchAnalyticsComponent implements OnInit {
       ]
     };
     this.tm_1 = {
-      labels: ['Environment', 'Politics', 'Infrastructure', 'Crime', 'Social Unrest' ],
+      labels: ['Environment', 'Politics', 'Infrastructure', 'Crime', 'Social Unrest'],
       datasets: [
         {
           label: 'Tweet Share for Last 6 Months',
@@ -86,9 +118,13 @@ export class SearchAnalyticsComponent implements OnInit {
 
 
   }
+
   ngOnInit() {
-    this.getSem();
+    this.hashtagFacetInputModelList = HashtagChartFacetInputModelGenerator.getListOfInputModels();
+    this.chartInputModelList = ChartInputModelGenerator.getListOfInputModels();
+    // this.getSem();
   }
+
   performAjax(url) {
     this.http.get(url)
       .subscribe(
@@ -100,6 +136,7 @@ export class SearchAnalyticsComponent implements OnInit {
         }
       );
   }
+
   getSem() {
     this.performAjax('http://ec2-18-224-179-186.us-east-2.compute.amazonaws.com:8983/solr/IRF18P4/select?q=*&fq=queryMetadata.query_city:bangkok&fq=created_at:[NOW-12MONTHS%20TO%20NOW]&rows=0');
     this.performAjax('http://ec2-18-224-179-186.us-east-2.compute.amazonaws.com:8983/solr/IRF18P4/select?q=*&fq=queryMetadata.query_city:bangkok&fq=created_at:[NOW-6MONTHS%20TO%20NOW]&rows=0');

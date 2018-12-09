@@ -1,4 +1,4 @@
-<div (click)="onItemClick()" class="search-result-item-container padding_0_px col-lg-12">
+<div class="search-result-item-container padding_0_px col-lg-12">
 
   <div class="col-lg-9 padding_0_px">
     <div
@@ -8,14 +8,14 @@
       <a target="_blank" class="search-result-item-link" href="https://twitter.com/{{tweet['user.screen_name']}}/status/{{tweet.id}}">https://twitter.com/{{tweet['user.screen_name']}}
         /status/{{tweet.id}}</a>
     </div>
-    <div *ngIf="tweet['entities.hashtags.text']" class="search-result-item-hashtags-container padding_0px col-lg-12">
+    <div *ngIf="tweet['entities.hashtags.text']" class="search-result-item-hashtags-container  col-lg-12">
     <span *ngFor="let hashtag of tweet['entities.hashtags.text']" class="hashtag hashtag_text">
       #{{hashtag}}
     </span>
     </div>
 
     <div *ngIf="!tweet['entities.hashtags.text'] && tweet['entities.user_mentions.screen_name']"
-         class="search-result-item-hashtags-container padding_0px col-lg-12">
+         class="search-result-item-hashtags-container  col-lg-12">
     <span *ngFor="let usermention of tweet['entities.user_mentions.screen_name']" class="hashtag hashtag_text">
       @{{usermention}}
     </span>
@@ -23,13 +23,13 @@
 
     <div
       *ngIf="!tweet['entities.hashtags.text'] && !tweet['entities.user_mentions.screen_name'] && tweet['entities.urls.display_url']"
-      class="search-result-item-hashtags-container padding_0px col-lg-12">
+      class="search-result-item-hashtags-container  col-lg-12">
     <span *ngFor="let url of tweet['entities.urls.display_url']" class="hashtag hashtag_text">
       {{url}}
     </span>
     </div>
 
-    <div class="search-result-item-body-container search-result-item-body padding_0px col-lg-12">
+    <div class="search-result-item-body-container search-result-item-body  col-lg-12">
       {{tweet.text}}
     </div>
 

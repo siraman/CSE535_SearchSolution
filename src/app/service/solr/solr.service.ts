@@ -9,6 +9,9 @@ import {FilterInputModel} from '../../query/filters/filter-input-model';
 import {FilterType} from '../../query/filters/filter-type';
 import {ApplicationConstants} from '../../util/application-constants';
 import {isNullOrUndefined} from 'util';
+import {HashtagFacetChart} from '../../model/hashtag-facet-chart';
+import {ChartInputModel} from '../../query/charts/chart-input-model';
+import {DateFacetTopicChart} from '../../model/date-facet-topic-chart';
 
 @Injectable({
   providedIn: 'root'
@@ -47,30 +50,30 @@ export class SolrService {
           switch (value.filter_type) {
             case FilterType.FILTER_TYPE_CITY:
               queryParameters.params = queryParameters.params
-                .append('fq',  ApplicationConstants.FOCUS_AREA_CITY + ':' + value.code );
+                .append('fq', ApplicationConstants.FOCUS_AREA_CITY + ':' + value.code);
               // queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_CITY + '":"' + value.code + '",');
               // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_CITY, value.code);
               break;
             case FilterType.FILTER_TYPE_LANGUAGE:
               queryParameters.params = queryParameters.params
-                .append('fq',  ApplicationConstants.FOCUS_AREA_LANGUAGE + ':' + value.code );
+                .append('fq', ApplicationConstants.FOCUS_AREA_LANGUAGE + ':' + value.code);
               // queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_LANGUAGE + '":"' + value.code + '",');
               // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_LANGUAGE, value.code);
               break;
             case FilterType.FILTER_TYPE_TOPIC:
               queryParameters.params = queryParameters.params
-                .append('fq',  ApplicationConstants.FOCUS_AREA_TOPIC + ':' + value.code );
+                .append('fq', ApplicationConstants.FOCUS_AREA_TOPIC + ':' + value.code);
               // queryParmas = queryParmas.concat('"' + ApplicationConstants.FOCUS_AREA_TOPIC + '":"' + value.code + '",');
               // queryParameters.params = queryParameters.params.append(ApplicationConstants.FOCUS_AREA_TOPIC, value.code);
               break;
             case FilterType.FILTER_TYPE_DATE_RANGE:
               queryParameters.params = queryParameters.params
-                .append('fq',  ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code );
+                .append('fq', ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code);
               // queryParmas = queryParmas.concat(ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code + ',');
               break;
             case FilterType.FILTER_TYPE_SORT:
               queryParameters.params = queryParameters.params
-                .append('sort',  value.code + ' desc');
+                .append('sort', value.code + ' desc');
               // queryParmas = queryParmas.concat(ApplicationConstants.FOCUS_AREA_DATERANGE + ':' + value.code + ',');
               break;
             default:
@@ -93,9 +96,31 @@ export class SolrService {
       queryParameters.params = queryParameters.params
         .append('q', '"' + queryObj.focusArea + '":"' + queryObj.key + '","' + 'entities.hashtags.text":"' + queryObj.value + '"');
     }
-    if  (!isNullOrUndefined(query) || !isNullOrUndefined(queryObj) || !isNullOrUndefined(filterQuery)) {
+    if (!isNullOrUndefined(query) || !isNullOrUndefined(queryObj) || !isNullOrUndefined(filterQuery)) {
       return this.httpClient.get<QueryResponse>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParameters);
     }
     return new Observable<QueryResponse>();
+  }
+
+  getFacetCountsForHashtagsChart(key: String, value: String): Observable<HashtagFacetChart> {
+    value = value.trim();
+    const options = value ?
+      {
+        params: new HttpParams().set('name', value.valueOf()).set('facet.field', 'hashtags').set('facet', 'on')
+          .set('fq', key + ':' + value).set('q', '*:*').set('rows', '0').set('wt', 'json')
+          .set('json.nl', 'arrntv').set('facet.limit', '5')
+      } : {};
+
+    return this.httpClient.get<HashtagFacetChart>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, options);
+  }
+
+  getFacetCountsForTimeChart(facetChartInputModel: ChartInputModel): Observable<DateFacetTopicChart> {
+    const options = {
+      params: new HttpParams().set('facet.field', facetChartInputModel.focus_area).set('facet', 'on')
+        .set('fq', 'created_at' + ':' + facetChartInputModel.date_range).set('q', '*:*').set('rows', '0').set('wt', 'json')
+        .set('json.nl', 'arrntv')
+    };
+
+    return this.httpClient.get<DateFacetTopicChart>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, options);
   }
 }

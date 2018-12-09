@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.hashtagFacetInputModelList = HashtagFacetInputModelGenerator.getListOfInputModels();
-
   }
 
   captureHashtagSearchEvent(queryDetails: []) {
