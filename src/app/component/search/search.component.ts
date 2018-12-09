@@ -1,7 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FilterInputModel} from '../../query/filters/filter-input-model';
 import {forEach} from '@angular/router/src/utils/collection';
+import {SearchResultComponent} from '../search-result/search-result.component';
+import {Tweet} from '../../model/query-result';
+import {ArbitFacetFields} from '../../model/arbit_facet';
+import {FacetInput} from '../../query/facets/facet-input';
 
 @Component({
   selector: 'app-search',
@@ -12,8 +16,15 @@ export class SearchComponent implements OnInit {
 
   query: string;
   filterQuery: FilterInputModel[];
+  facetInput: ArbitFacetFields[];
+
   captureQueryChangeEvent(event) {
     this.query = event;
+  }
+
+  captureFacetInputEvent(event) {
+    this.facetInput = event;
+    console.log('checking facetInput');
   }
 
   performFilterSearch(event: FilterInputModel[]) {
@@ -28,7 +39,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.query =  this.activatedRoute.snapshot.queryParams['query'];
+    this.query = this.activatedRoute.snapshot.queryParams['query'];
   }
 
 }

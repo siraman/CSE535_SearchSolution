@@ -19,8 +19,11 @@ import {TweetDisplayComponent} from './component/tweet-display/tweet-display.com
 import {SearchAnalysisComponent} from './component/search-analysis/search-analysis.component';
 import {SearchAnalyticsComponent} from './search-analytics/search-analytics.component';
 import {ChartModule} from 'primeng/chart';
-import {MatDialogModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {GoogleChart} from './angular2-google-chart.directive';
+import {ChartComponent} from './component/chart/chart.component';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +39,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     SearchResultItemComponent,
     TweetDisplayComponent,
     SearchAnalysisComponent,
+    GoogleChart,
+    ChartComponent,
     SearchAnalyticsComponent,
   ],
   imports: [
