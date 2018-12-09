@@ -17,18 +17,16 @@ export class TweetDisplayComponent implements OnInit {
   public documentMagnitude: number;
 
   constructor(private dialogRef: MatDialogRef<TweetDisplayComponent>, @Inject(MAT_DIALOG_DATA) data, private score: GoogleCloudService) {
-    console.log('Constructor called');
     this.tweetUnformatted = data.tweet;
-    console.log(this.tweetUnformatted['queryMetadata.query_language'][0]);
-    if (this.tweetUnformatted['queryMetadata.query_language'] === 'fr') {
-      console.log('IS FRENCH');
-      this.tweetUnformatted['queryMetadata.query_language'] = 'French';
+    if (this.tweetUnformatted['queryMetadata.query_language'] != null) {
+      this.tweetUnformatted['queryMetadata.query_language'] = ApplicationConstants.getFormattedLanguageName(this.tweetUnformatted['queryMetadata.query_language'][0]);
     }
-
-    console.log(ApplicationConstants.getFormattedLanguageName(this.tweetUnformatted['queryMetadata.query_language']));
-    this.tweetUnformatted['queryMetadata.query_language'] = ApplicationConstants.getFormattedLanguageName(this.tweetUnformatted['queryMetadata.query_language'][0]);
-    this.tweetUnformatted['queryMetadata.query_topic'] = ApplicationConstants.getFormattedTopicName(this.tweetUnformatted['queryMetadata.query_topic'][0]);
-    this.tweetUnformatted['queryMetadata.query_city'] = ApplicationConstants.getFormattedCityName(this.tweetUnformatted['queryMetadata.query_city'][0]);
+    if (this.tweetUnformatted['queryMetadata.query_topic'] != null) {
+      this.tweetUnformatted['queryMetadata.query_topic'] = ApplicationConstants.getFormattedTopicName(this.tweetUnformatted['queryMetadata.query_topic'][0]);
+    }
+    if (this.tweetUnformatted['queryMetadata.query_city'] != null) {
+      this.tweetUnformatted['queryMetadata.query_city'] = ApplicationConstants.getFormattedCityName(this.tweetUnformatted['queryMetadata.query_city'][0]);
+    }
     this.tweet = this.tweetUnformatted;
     this.score.getScore(this.tweet).subscribe(scores => {
       if (scores.response != null) {
