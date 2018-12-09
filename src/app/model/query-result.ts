@@ -13,6 +13,8 @@ export interface Tweet {
   id: number;
   id_str: string;
   text: string;
+  text_filtered: string;
+  'user.id': number;
   full_text: string;
   truncated: boolean;
   'entities.hashtags.text': string;
