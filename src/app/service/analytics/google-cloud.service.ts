@@ -11,17 +11,15 @@ import {GoogleCloudConstants} from '../../util/url-constants';
 })
 export class GoogleCloudService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   getScore(tweet): Observable<QueryResponse> {
-    console.log('came here');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
     });
-    console.log('tweet text');
-    console.log(tweet.text[0]);
     const data = {'document': {'type': 'PLAIN_TEXT', 'content': tweet.text[0]}, 'encodingType': 'UTF8'};
-    return this.httpClient.post<QueryResponse>('https://language.googleapis.com/v1/documents:analyzeSentiment?key=AIzaSyD8RcyaQF5bSMfgVVhXG36JdOOTYPqerIY', data, { headers: headers});
+    return this.httpClient.post<QueryResponse>('https://language.googleapis.com/v1/documents:analyzeSentiment?key=AIzaSyD8RcyaQF5bSMfgVVhXG36JdOOTYPqerIY', data, {headers: headers});
   }
 
 }

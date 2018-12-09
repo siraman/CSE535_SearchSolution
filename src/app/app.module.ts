@@ -21,6 +21,10 @@ import {SearchAnalyticsComponent} from './search-analytics/search-analytics.comp
 import {ChartModule} from 'primeng/chart';
 import {MatDialogModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {GoogleChartsModule} from 'angular-google-charts';
+import { HashtagChartComponent } from './component/hashtag-chart/hashtag-chart.component';
+import { TweetChartComponent } from './component/tweet-chart/tweet-chart.component';
+import { CountChartComponent } from './component/count-chart/count-chart.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     TweetDisplayComponent,
     SearchAnalysisComponent,
     SearchAnalyticsComponent,
+    HashtagChartComponent,
+    TweetChartComponent,
+    CountChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BsDatepickerModule.forRoot(),
     ChartModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GoogleChartsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

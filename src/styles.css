@@ -135,7 +135,7 @@ html {
 }
 
 .padding_0px {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .color_red {
