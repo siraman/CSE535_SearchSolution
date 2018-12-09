@@ -64,6 +64,7 @@
 }
 
 .search_engine_icon_container {
+  cursor: pointer;
   display: flex;
   float: left;
   align-items: center;
