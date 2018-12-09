@@ -13,10 +13,18 @@ export interface FacetCounts {
 }
 
 export interface ArbitFacetFields {
-  'queryMetadata.query_city': { [key: string]: number }[];
-  'queryMetadata.query_topic': { [key: string]: number }[];
-  // 'queryMetadata.query_language': { [key: string]: number }[];
+  'queryMetadata.query_topic': FacetCount[];
+  'queryMetadata.query_language': FacetCount[];
+  'queryMetadata.query_city': FacetCount[];
 }
+
+export interface FacetCount {
+
+  name: string;
+  type: string;
+  value: number;
+}
+
 
 export interface Response {
   numFound: number;
