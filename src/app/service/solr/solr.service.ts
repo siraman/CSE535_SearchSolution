@@ -39,19 +39,19 @@ export class SolrService {
 
   getFacetCounts(query, value, filterQuery?: FilterInputModel[]): Observable<ArbitFacet> {
     const options = {
-      params: new HttpParams().set('facet.field', value).set('facet.field', value).set('facet.field', value).set('facet', 'on')
+      params: new HttpParams().set('facet.field', 'queryMetadata.query_topic').append('facet.field', 'queryMetadata.query_city').append('facet.field', 'queryMetadata.query_language').set('facet', 'on')
         .set('q', query).set('rows', '0').set('wt', 'json')
     };
     return this.httpClient.get<ArbitFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, options);
   }
 
   // getFacetCountsForQueryResult(query, queryObj: Query, filterQuery?: FilterInputModel[]): Observable<ArbitFacet> {
-    // let queryParameters = QueryUtil.getQueryParamsForSearch(query, queryObj, null, null, filterQuery);
-    // const queryParams1 = queryParameters.params.set('facet.field', 'queryMetadata_query_city')
-    //   .append('facet.field', 'queryMetadata_query_topic')
-    //   .append('facet.field', 'queryMetadata_query_language').set('facet', 'on').set('rows', '0').set('wt', 'json')
-    //   .set('json.nl', 'map');
-    // return this.httpClient.get<ArbitFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParameters);
+  // let queryParameters = QueryUtil.getQueryParamsForSearch(query, queryObj, null, null, filterQuery);
+  // const queryParams1 = queryParameters.params.set('facet.field', 'queryMetadata_query_city')
+  //   .append('facet.field', 'queryMetadata_query_topic')
+  //   .append('facet.field', 'queryMetadata_query_language').set('facet', 'on').set('rows', '0').set('wt', 'json')
+  //   .set('json.nl', 'map');
+  // return this.httpClient.get<ArbitFacet>(SolrUrlConstants.SOLR_BASE_URL + SolrUrlConstants.SOLR_SEARCH_URL, queryParameters);
   // }
 
   getSearchResults(query, pageNumber, pageSize, queryObj: Query, filterQuery?: FilterInputModel[]): Observable<QueryResponse> {
