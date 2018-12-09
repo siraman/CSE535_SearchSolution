@@ -8,6 +8,11 @@ import {ArbitFacetFields} from '../../model/arbit_facet';
 })
 export class ChartComponent implements OnInit, OnChanges {
   @Input() results: Array<Array<Array<string | number>>>;
+
+  public pie_ChartOptions = {
+    width: 900,
+    height: 500
+  };
   myOptions = {
     animation: {
       duration: 3000,
@@ -48,50 +53,9 @@ export class ChartComponent implements OnInit, OnChanges {
 
   };
   public data: any;
-  public pie_data: any;
-  public pie_data2: any;
-  public pie_ChartOptions_1 = {
-    title: '% of tweets per topic in NYC',
-    width: 900,
-    height: 500
-  };
-  public pie_ChartOptions_2 = {
-    title: '% of tweets per topic in Delhi',
-    width: 900,
-    height: 500
-  };
+
+
   public map_ChartOptions = {chatArea: {width: 900, height: 500}};
-  public bar_ChartOptions = {
-    title: 'Population of Largest U.S. Cities',
-    chartArea: { width: '50%' },
-    hAxis: {
-      title: 'Total Population',
-      minValue: 0,
-      textStyle: {
-        bold: true,
-        fontSize: 12,
-        color: '#4d4d4d'
-      },
-      titleTextStyle: {
-        bold: true,
-        fontSize: 18,
-        color: '#4d4d4d'
-      }
-    },
-    vAxis: {
-      title: 'City',
-      textStyle: {
-        fontSize: 14,
-        bold: true,
-        color: '#848484'
-      },
-      titleTextStyle: {
-        fontSize: 14,
-        bold: true,
-        color: '#848484'
-      }
-    }
-  };
   constructor() {
   }
   ngOnChanges() {
