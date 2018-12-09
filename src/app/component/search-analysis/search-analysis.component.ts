@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
+import {Component, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter} from '@angular/core';
 import {Tweet} from '../../model/query-result';
 import {ChartComponent} from '../chart/chart.component';
 import {ArbitFacetFields} from '../../model/arbit_facet';
@@ -10,15 +10,19 @@ import {SolrService} from '../../service/solr/solr.service';
   templateUrl: './search-analysis.component.html',
   styleUrls: ['./search-analysis.component.css']
 })
+
 export class SearchAnalysisComponent implements OnInit, OnChanges {
   @Input() public results: ArbitFacetFields[];
-
+  @Output() searchAnalysisEvent: EventEmitter<Boolean> = new EventEmitter<Boolean>();
   arbitFacetFields: ArbitFacetFields;
 
   constructor(private solrService: SolrService) {
     console.log('inside search analysis');
   }
 
+  backToSearch() {
+    this.searchAnalysisEvent.emit(true);
+  }
   ngOnInit() {
 
 

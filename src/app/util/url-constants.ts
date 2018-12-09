@@ -7,7 +7,4 @@ export class GoogleCloudConstants {
   static readonly API_KEY = 'AIzaSyD8RcyaQF5bSMfgVVhXG36JdOOTYPqerIY';
   static readonly GOOGLE_LANGUAGE_BASE_URL = 'https://language.googleapis.com/v1/documents:analyzeSentiment';
 }
-export class GoogleCloudConstants {
-  static readonly API_KEY = 'AIzaSyD8RcyaQF5bSMfgVVhXG36JdOOTYPqerIY';
-  static readonly GOOGLE_LANGUAGE_BASE_URL = 'https://language.googleapis.com/v1/documents:analyzeSentiment';
-}
+

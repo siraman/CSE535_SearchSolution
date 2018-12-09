@@ -29,7 +29,7 @@ export class FilterInputModelGenerator {
         },
         {
           display: ApplicationConstants.FOCUS_AREA_TOPIC_INFRASTRUCTURE_DISPLAY_STRING,
-          code: ApplicationConstants.FOCUS_AREA_TOPIC_INFRASTRUCTURE_DISPLAY_STRING,
+          code: ApplicationConstants.FOCUS_AREA_TOPIC_INFRASTRUCTURE_CODE_STRING,
           filter_type: FilterType.FILTER_TYPE_TOPIC
         }
       ];

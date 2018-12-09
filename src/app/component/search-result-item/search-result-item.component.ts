@@ -18,7 +18,7 @@ export class SearchResultItemComponent implements OnInit {
   onItemClick() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
-    dialogConfig.width = '60%';
+    dialogConfig.width = '50%';
     dialogConfig.data = {tweet: this.tweet};
     this.dialog.open(TweetDisplayComponent, dialogConfig);
   }

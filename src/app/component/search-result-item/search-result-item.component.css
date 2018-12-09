@@ -41,7 +41,7 @@
 }
 
 .search-result-item-body-container {
-  padding: 20px 40px 20px 40px;
+  padding: 30px 40px 30px 40px;
 }
 
 .search-result-item-body {
@@ -51,6 +51,7 @@
   font-size: 1.6rem;
   line-height: 1.5;
   text-align: justify;
+  overflow: hidden
 }
 
 .search-result-item-hashtags-container {

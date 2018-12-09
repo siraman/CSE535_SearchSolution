@@ -24,6 +24,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {GoogleChart} from './angular2-google-chart.directive';
 import {ChartComponent} from './component/chart/chart.component';
 
+import {GoogleChartsModule} from 'angular-google-charts';
+import { HashtagChartComponent } from './component/hashtag-chart/hashtag-chart.component';
+import { TweetChartComponent } from './component/tweet-chart/tweet-chart.component';
+import { CountChartComponent } from './component/count-chart/count-chart.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,9 @@ import {ChartComponent} from './component/chart/chart.component';
     GoogleChart,
     ChartComponent,
     SearchAnalyticsComponent,
+    HashtagChartComponent,
+    TweetChartComponent,
+    CountChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +59,8 @@ import {ChartComponent} from './component/chart/chart.component';
     BsDatepickerModule.forRoot(),
     ChartModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GoogleChartsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

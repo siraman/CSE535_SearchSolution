@@ -6,7 +6,7 @@
     </div>
 
     <div *ngIf="query" class="col-lg-3 padding-0px">
-      <button (click)="analyseResult()" class="btn search-result-analysis_button">Analyse result</button>
+      <button (click)="sendMessage()" class="btn search-result-analysis_button">Analyse result</button>
     </div>
   </div>
 
@@ -19,7 +19,7 @@
       <pagination-controls (pageChange)="getPage($event)" autoHide="true" directionLinks='true' id='server'
                            nextLabel="" previousLabel="" responsive="true"></pagination-controls>
     </div>
-    <button (click)="sendMessage()" class="button">Send Tweet</button>
+    <!--<button (click)="sendMessage()" class="button">Send Tweet</button>-->
   </div>
 
 

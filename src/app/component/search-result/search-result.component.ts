@@ -19,8 +19,6 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
   hashTagQueryObject: Query;
   results: Tweet[];
   facetResultFields: ArbitFacetFields[];
-  temporary: ArbitFacetFields;
-  arbitFacet: ArbitFacet;
   pageSize = 10;
   totalTweets = 0;
   currentPage = 1;
@@ -39,30 +37,20 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
     this.searchResults.getSearchResults(query, pageNumber, pageSize, queryObj, filterQuery).subscribe(tweet => {
       if (tweet.response != null) {
         this.results = tweet.response.docs;
-        tweet.response.docs.forEach(tweet1 => {
-          if (tweet1.entities != null) {
-            console.log('Found entities');
-          }
-        });
         this.totalTweets = tweet.response.numFound;
         this.currentPage = pageNumber;
       }
     });
     const facetQuery = this.query;
-    this.searchResults.getFacetCounts(facetQuery, 'queryMetadata.query_city').subscribe(facetResults => this.facetResultFields[0] = facetResults.facet_counts.facet_fields, error1 => {
-      // TODO: Implement the error state.
+    this.searchResults.getFacetCounts(facetQuery, 'queryMetadata.query_city')
+      .subscribe(facetResults => this.facetResultFields[0] = facetResults.facet_counts.facet_fields, error1 => {
     });
-    console.log('facet fields');
-    console.log(this.facetResultFields);
-    const facetQuery_2 = 'queryMetadata.query_city:nyc';
-    this.searchResults.getFacetCounts(facetQuery_2, 'queryMetadata.query_topic').subscribe(facetResults => this.facetResultFields[1] = facetResults.facet_counts.facet_fields, error1 => {
-      // TODO: Implement the error state.
+    this.searchResults.getFacetCounts('queryMetadata.query_city:nyc', 'queryMetadata.query_topic')
+      .subscribe(facetResults => this.facetResultFields[1] = facetResults.facet_counts.facet_fields, error1 => {
     });
-    console.log('facet fields 2');
-    console.log(this.facetResultFields);
     const facetQuery_2 = 'queryMetadata.query_city:delhi';
-    this.searchResults.getFacetCounts(facetQuery_2, 'queryMetadata.query_topic').subscribe(facetResults => this.facetResultFields[2] = facetResults.facet_counts.facet_fields, error1 => {
-      // TODO: Implement the error state.
+    this.searchResults.getFacetCounts(facetQuery_2, 'queryMetadata.query_topic')
+      .subscribe(facetResults => this.facetResultFields[2] = facetResults.facet_counts.facet_fields, error1 => {
     });
   }
 
@@ -105,15 +93,18 @@ export class SearchResultComponent implements OnInit, OnDestroy, OnChanges, DoCh
   // }
 
   ngOnInit() {
+    console.log('came to on init')
     const freeTextSearchQuery = this.activatedRoute.snapshot.queryParams['query'];
     const topic = this.activatedRoute.snapshot.queryParams['topic'];
     const hashTag = this.activatedRoute.snapshot.queryParams['hashtag'];
     const focusArea = this.activatedRoute.snapshot.queryParams['focusArea'];
     this.locationService.replaceState('/search');
+    console.log(freeTextSearchQuery)
     if (freeTextSearchQuery) {
       this.query = freeTextSearchQuery;
       this.getTweets(freeTextSearchQuery, 1, this.pageSize);
-    } else {
+    }
+    if (hashTag) {
       const queryObject = new Query();
       queryObject.key = topic;
       queryObject.value = hashTag;

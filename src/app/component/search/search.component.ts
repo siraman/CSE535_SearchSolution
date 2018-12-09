@@ -17,13 +17,18 @@ export class SearchComponent implements OnInit {
   query: string;
   filterQuery: FilterInputModel[];
   facetInput: ArbitFacetFields[];
+  hideSearchResults: Boolean = false;
 
   captureQueryChangeEvent(event) {
     this.query = event;
   }
+  backToSearch(event: boolean){
+    this.hideSearchResults = false;
+  }
 
   captureFacetInputEvent(event) {
     this.facetInput = event;
+    this.hideSearchResults = true;
     console.log('checking facetInput');
   }
 
